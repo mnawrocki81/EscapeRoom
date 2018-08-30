@@ -1,3 +1,4 @@
+package pl.gra.zagadki;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -54,10 +55,10 @@ public class Zagadka3 extends JDialog {
 	   suwak.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 
-		   tOdpowiedü.setText("" + suwak.getValue());
-		   setFocus();
+				tOdpowiedü.setText("" + suwak.getValue());
+				setFocus();
 			}
-	   });
+		});
 	   //ustawienie suwaka , podzia≥ki , etykiet,  dosuwania do najbliøszej kreski, 
 	   suwak.setPaintTicks(true);
 	   suwak.setPaintLabels(true);
@@ -83,7 +84,6 @@ public class Zagadka3 extends JDialog {
 					bOdp.setVisible(false);
 					setVisible(false);
 				}
-
 			}
 
 		});
@@ -94,12 +94,12 @@ public class Zagadka3 extends JDialog {
        add(tOdpowiedü);
        
        bPodpowiedü = new JButton("Podpowiedü");
-       bPodpowiedü.addActionListener(new ActionListener() {
-   		public void actionPerformed(ActionEvent e) {
-      
-   		 lPodpowiedü.setVisible(true);
-   		}
-          });
+	   bPodpowiedü.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lPodpowiedü.setVisible(true);
+			}
+		});
        bPodpowiedü.setBounds(600, 550, 120, 25);
        add(bPodpowiedü);
        
@@ -141,21 +141,19 @@ public class Zagadka3 extends JDialog {
 	   add(bCancel);
 
 	}
-	public String getOdp()
-    {
-     return tOdpowiedü.getText();
-    }
-    
-    public void setFocus()
-    {
-    	tOdpowiedü.requestFocusInWindow();
- 	   
-    }
-    
-    public boolean isOK()
-    {
-    	return okData;
-    }
+
+	public String getOdp() {
+		return tOdpowiedü.getText();
+	}
+
+	public void setFocus() {
+		tOdpowiedü.requestFocusInWindow();
+
+	}
+
+	public boolean isOK() {
+		return okData;
+	}
    
 }
 
@@ -167,7 +165,6 @@ class ImagePanel3 extends JPanel {
 	public ImagePanel3() {
 		super();
 
-		
 		File imageFile3 = new File("images/liczby.jpg");
 		try {
 			imageZagadka3 = ImageIO.read(imageFile3);
@@ -175,14 +172,14 @@ class ImagePanel3 extends JPanel {
 			System.err.println("Blad odczytu obrazka");
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	//@Override
+	// @Override
 	public void paintComponent(Graphics g) {
-		
+
 		Graphics2D zagadka3 = (Graphics2D) g;
 		zagadka3.drawImage(imageZagadka3, 0, 0, this);
-		
+
 	}
 }

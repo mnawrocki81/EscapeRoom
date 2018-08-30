@@ -1,3 +1,4 @@
+package pl.gra.zagadki;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,8 +33,8 @@ public class Zagadka extends JDialog {
 	
 	
 	
-	public Zagadka(OknoGry poczπtek) {
-	   super(poczπtek, "Zagadka1", true);
+	public Zagadka(JFrame owner) {
+	   super(owner, "Zagadka1", true);
 	   setBounds(150, 150, 1120, 700);
 	   setLayout(null);
 	   setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //zamknπÊ oknno moøna tylko przyciskiem "WrÛÊ" lub podajπc raz dobrπ odpowiedz
@@ -55,21 +57,19 @@ public class Zagadka extends JDialog {
 	   //obiekt  pola tekstowego do wpisania odpowiedzi, dzia≥a po wciúniÍcie entera lub potwierdzeniu przyciskiem
 	   tOdpowiedü = new JTextField();
 	   tOdpowiedü.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 
-			if (getOdp().equals(wynik)  )
-			{
-				    okData = true;
-				    tOdpowiedü.setEditable(false);
-				    odpPoprawna.setVisible(true);
+				if (getOdp().equals(wynik)) {
+					okData = true;
+					tOdpowiedü.setEditable(false);
+					odpPoprawna.setVisible(true);
 					bOdp.setVisible(false);
 					setVisible(false);
-			   
-				  				   				    
-				}	
-																	
+
 				}
-       });
+
+			}
+		});
      
 	   tOdpowiedü.setBounds(250, 550, 100, 30);
 	   tOdpowiedü.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -78,12 +78,12 @@ public class Zagadka extends JDialog {
        
        //moøna skorzystaÊ z podpowiedzi, w przypadku problemÛw z rozwiπzaniem zadania
        bPodpowiedü = new JButton("Podpowiedü");
-       bPodpowiedü.addActionListener(new ActionListener() {
-   		public void actionPerformed(ActionEvent e) {
-      
-   		 lPodpowiedü.setVisible(true);
-   		}
-          });
+	   bPodpowiedü.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lPodpowiedü.setVisible(true);
+			}
+		});
        bPodpowiedü.setBounds(400, 550, 120, 25);
        add(bPodpowiedü);
        
@@ -101,7 +101,7 @@ public class Zagadka extends JDialog {
 	   //przycisk Potwierdü moøe byÊ uøyty tylko raz, pÛzniej zostaje ukryty i pojawia siÍ komunikat o poprawnej odpowiedzi
 	   bOdp = new JButton("Potwierdü");
 	   bOdp.setVisible(true);
-		bOdp.addActionListener(new ActionListener() {
+	   bOdp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (getOdp().equals(wynik)) {
@@ -120,12 +120,12 @@ public class Zagadka extends JDialog {
 	   
 	   bCancel = new JButton("WrÛÊ");
 	   bCancel.addActionListener(new ActionListener() {
-	   		public void actionPerformed(ActionEvent e) {
-	      
-	   			okData = false;
-	   			setVisible(false);
-	   		}
-	          });
+			public void actionPerformed(ActionEvent e) {
+
+				okData = false;
+				setVisible(false);
+			}
+		});
 	   bCancel.setBounds(200, 600, 120, 25);
 	   add(bCancel);
 
@@ -133,21 +133,18 @@ public class Zagadka extends JDialog {
 	
 	
 	//Funkcje do wspÛ≥pracy g≥Ûwnego okna gry i okna dialogowego
-	public String getOdp()
-    {
-     return tOdpowiedü.getText();
-    }
+	public String getOdp() {
+		return tOdpowiedü.getText();
+	}
     
-    public void setFocus()
-    {
-    	tOdpowiedü.requestFocusInWindow();
- 	   
-    }
+	public void setFocus() {
+		tOdpowiedü.requestFocusInWindow();
+
+	}
     
-    public boolean isOK()
-    {
-    	  	return okData;
-    }
+	public boolean isOK() {
+		return okData;
+	}
        
     
 }
@@ -160,7 +157,6 @@ class ImagePanel1 extends JPanel {
 	public ImagePanel1() {
 		super();
 
-		
 		File imageFile1 = new File("images/slimak.jpg");
 		try {
 			imageZagadka1 = ImageIO.read(imageFile1);
@@ -168,16 +164,15 @@ class ImagePanel1 extends JPanel {
 			System.err.println("Blad odczytu obrazka");
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	//@Override
+	// @Override
 	public void paintComponent(Graphics g) {
-		
+
 		Graphics2D zagadka1 = (Graphics2D) g;
 		zagadka1.drawImage(imageZagadka1, 0, 0, this);
-		
+
 	}
 }
-
 

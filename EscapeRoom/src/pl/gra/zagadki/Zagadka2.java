@@ -1,3 +1,4 @@
+package pl.gra.zagadki;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -54,7 +55,7 @@ public class Zagadka2 extends JDialog {
        
 	   tOdpowiedü = new JTextField();
 	  
-		tOdpowiedü.addActionListener(new ActionListener() {
+	   tOdpowiedü.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (getOdp().equals(wynik)) {
@@ -64,7 +65,6 @@ public class Zagadka2 extends JDialog {
 					bOdp.setVisible(false);
 					setVisible(false);
 				}
-
 			}
 		});
 
@@ -74,12 +74,12 @@ public class Zagadka2 extends JDialog {
        add(tOdpowiedü);
        
        bPodpowiedü = new JButton("Podpowiedü");
-       bPodpowiedü.addActionListener(new ActionListener() {
-   		public void actionPerformed(ActionEvent e) {
-      
-   		 lPodpowiedü.setVisible(true);
-   		}
-          });
+	   bPodpowiedü.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lPodpowiedü.setVisible(true);
+			}
+		});
        bPodpowiedü.setBounds(400, 550, 120, 25);
        add(bPodpowiedü);
        
@@ -92,51 +92,44 @@ public class Zagadka2 extends JDialog {
 	   bOdp = new JButton("Potwierdü");
 	   bOdp.setVisible(true);
 	   bOdp.addActionListener(new ActionListener() {
-	   		public void actionPerformed(ActionEvent e) {
-	      
-	   			if (getOdp().equals(wynik)  )
-				{
-					    okData = true;
-					    tOdpowiedü.setEditable(false);
-					    odpPoprawna.setVisible(true);
-						bOdp.setVisible(false);
-						setVisible(false);
-				   			   			   				    
-					}	
-	   		 
-	   		}
-	          });
+			public void actionPerformed(ActionEvent e) {
+
+				if (getOdp().equals(wynik)) {
+					okData = true;
+					tOdpowiedü.setEditable(false);
+					odpPoprawna.setVisible(true);
+					bOdp.setVisible(false);
+					setVisible(false);
+				}
+			}
+		});
 	   bOdp.setBounds(50, 600, 120, 25);
 	   add(bOdp);
 	   
 	   bCancel = new JButton("WrÛÊ");
 	   bCancel.addActionListener(new ActionListener() {
-	   		public void actionPerformed(ActionEvent e) {
-	      
-	   			okData = false;
-	   			setVisible(false);
-	   		}
-	          });
+			public void actionPerformed(ActionEvent e) {
+
+				okData = false;
+				setVisible(false);
+			}
+		});
 	   bCancel.setBounds(200, 600, 120, 25);
 	   add(bCancel);
 
 	}
 
-	public String getOdp()
-    {
-     return tOdpowiedü.getText();
-    }
-    
-    public void setFocus()
-    {
-    	tOdpowiedü.requestFocusInWindow();
- 	   
-    }
-    
-    public boolean isOK()
-    {
-    	return okData;
-    }
+	public String getOdp() {
+		return tOdpowiedü.getText();
+	}
+
+	public void setFocus() {
+		tOdpowiedü.requestFocusInWindow();
+	}
+
+	public boolean isOK() {
+		return okData;
+	}
 
 }
 

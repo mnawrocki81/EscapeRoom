@@ -1,3 +1,4 @@
+package pl.gra;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
@@ -6,6 +7,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
+import pl.gra.zagadki.Zagadka;
+import pl.gra.zagadki.Zagadka2;
+import pl.gra.zagadki.Zagadka3;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -114,17 +120,17 @@ public class OknoGry extends EscapeRoom {
 		zagadka1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 //otwarcie okna dialogowego z zagadk¹ 
-				if (fib==null)
-				{fib = new Zagadka (null); //tworzenie nowego obiektu klasy zagadka, gdyby wczeœniej nie by³ utworzony
+				if (fib == null) {
+					fib = new Zagadka(null); // tworzenie nowego obiektu klasy zagadka, gdyby wczeœniej nie by³
+												// utworzony
 				}
 				
 				fib.setVisible(true);
 				fib.setFocus(); //funkcja ustawiaj¹ca kursor w JTextField do wpisania odpowiedzi
 				
-				if (fib.isOK() )
-				{
-					odpowiedzi.setText(text + fib.getOdp()); //dodanie poprawnej odpowiedzi do notatnika JLabel
-									}
+				if (fib.isOK()) {
+					odpowiedzi.setText(text + fib.getOdp()); // dodanie poprawnej odpowiedzi do notatnika JLabel
+				}
 			
 				text = 	odpowiedzi.getText() + "   "; 	 //ustawienie nowej wartoœci pola text									
 			}
@@ -138,21 +144,18 @@ public class OknoGry extends EscapeRoom {
 		zagadka2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (znaki==null)
-				{znaki = new Zagadka2 (null);
+				if (znaki == null) {
+					znaki = new Zagadka2(null);
 				}
 				
 				znaki.setVisible(true);
 				znaki.setFocus();
 				
-				if (znaki.isOK())
-				{
+				if (znaki.isOK()) {
 					odpowiedzi.setText(text + znaki.getOdp());
-					
-				
-			
-				text = 	odpowiedzi.getText() + "   "; 	
-			}
+
+					text = odpowiedzi.getText() + "   ";
+				}
 				
 			}
 		});
@@ -164,15 +167,14 @@ public class OknoGry extends EscapeRoom {
 		zagadka3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (liczby==null)
-				{liczby = new Zagadka3 (null);
+				if (liczby == null) {
+					liczby = new Zagadka3(null);
 				}
 				
 				liczby.setVisible(true);
 				liczby.setFocus();
 				
-				if (liczby.isOK())
-				{
+				if (liczby.isOK()) {
 					odpowiedzi.setText(text + liczby.getOdp());
 				}
 			
@@ -230,14 +232,18 @@ public class OknoGry extends EscapeRoom {
 						kod.setEditable(false); // po up³yniêciu czasu, nie mo¿na ju¿ wpisaæ odpowiedzi
 					}
 
-					else if (sekundy < 10) // zaprogramowanie aby sekundy od 0 do 9 , pokazywa³y siê  z dodatkowym zerem z przodu tj. 01, 02 itp.
+					else if (sekundy < 10) // zaprogramowanie aby sekundy od 0 do 9 , pokazywa³y siê z dodatkowym zerem
+											// z przodu tj. 01, 02 itp.
 					{
 						licznik1.setForeground(Color.RED);
 						Toolkit.getDefaultToolkit().beep();
 						licznik1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
-					} else {
+					}
+					
+					else {
 						licznik1.setForeground(Color.RED); // ostatnia minuta wyœwietla siê z kolorze czerwonym
-						Toolkit.getDefaultToolkit().beep(); // dla zwiêkszenia napiecia ka¿da sekunda w ostatniej minucie z dzwiêkiem
+						Toolkit.getDefaultToolkit().beep(); // dla zwiêkszenia napiecia ka¿da sekunda w ostatniej
+															// minucie z dzwiêkiem
 						licznik1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
 					}
 
@@ -245,7 +251,8 @@ public class OknoGry extends EscapeRoom {
 
 				else if (sekundy < 10) {
 					licznik1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
-				} else {
+				} 
+				else {
 					licznik1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
 				}
 				i--;
@@ -258,13 +265,13 @@ public class OknoGry extends EscapeRoom {
 		kod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (kod.getText().equals(kodWyjscia) )
-				{tm.stop();
-				komunikat.setText("Kod poprawny, uda³o Ci siê wyjœæ");
-				kod.setEditable(false);}
+				if (kod.getText().equals(kodWyjscia)) {
+					tm.stop();
+					komunikat.setText("Kod poprawny, uda³o Ci siê wyjœæ");
+					kod.setEditable(false);
+				}
 				
-				else 
-				{
+				else {
 					komunikat.setText("Kod b³êdny, próbuj dalej");
 				}
 			
@@ -293,16 +300,16 @@ class ImagePanel0 extends JPanel {
 			System.err.println("Blad odczytu obrazka");
 			e.printStackTrace();
 		}
-	
+
 	}
 
-	//@Override
+	// @Override
 	public void paintComponent(Graphics g) {
-		
+
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(image, 0, 0, this);
 
 	}
-	
+
 }
 
