@@ -1,4 +1,5 @@
 package pl.gra.zagadki;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -19,126 +20,179 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-//zaprogramowanie okna z zagadkπ, dziedziczπcego po klasie JDialog
+//zaprogramowanie okna z zagadkƒÖ, dziedziczƒÖcego po klasie JDialog
 public class Zagadka extends JDialog {
 	
-	private JTextField tOdpowiedü;
-	private JButton bPodpowiedü, bOdp, bCancel;
+	private JTextField tAnswer;
+	private JButton bPrompt, bAnswer, bCancel;
 	private JPanel imageZagadka1;
-	private JLabel odpZagadka1, odpPoprawna;
-	private JTextArea lPodpowiedü;
-	private JScrollPane sPodpowiedü;
+	private JLabel odpZagadka1, odpTrue, odpWrong;
+	private JTextArea lPrompt;
+	private JScrollPane sPrompt;
 	private boolean okData = false;
-	private static final String wynik = "5";
+	private static final String  result = "5";
 	
 	
 	
 	public Zagadka(JFrame owner) {
 	   super(owner, "Zagadka1", true);
-	   setBounds(150, 150, 1120, 700);
-	   setLayout(null);
-	   setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //zamknπÊ oknno moøna tylko przyciskiem "WrÛÊ" lub podajπc raz dobrπ odpowiedz
-
-	   imageZagadka1 = new ImagePanel1();
-	   imageZagadka1.setBounds(50, 30, 1000, 500);
-	   add(imageZagadka1);
 	   
-	   odpZagadka1 = new JLabel("Podaj odpowiedü:  ");
-	   odpZagadka1.setBounds(50, 550, 180, 30);
-	   odpZagadka1.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   add(odpZagadka1);
+	   setZagadka1Parametres ();
+	   createImageParameters();
+	   createLabelGiveAnswer();
+	   createLabelAnswerTrue();
+	   createLabelAwswerWrong();
+	   createTextFieldToEnterAnswer();
+	   createButtonPrompt();
+	   createTextAreaWithPrompt();
+	   createButtonConfirmingTheAnswer ();
+	   createButtonToCancel();
 	   
-	   odpPoprawna = new JLabel("Odpowiedü poprawna!");
-	   odpPoprawna.setBounds(50, 600, 180, 30);
-	   odpPoprawna.setFont(new Font("SansSerif", Font.PLAIN ,14));
-	   odpPoprawna.setVisible(false);
-	   add(odpPoprawna);
-       
-	   //obiekt  pola tekstowego do wpisania odpowiedzi, dzia≥a po wciúniÍcie entera lub potwierdzeniu przyciskiem
-	   tOdpowiedü = new JTextField();
-	   tOdpowiedü.addActionListener(new ActionListener() {
+	}
+	
+	public void setZagadka1Parametres ()
+	{
+		setBounds(150, 150, 1120, 700);
+		setLayout(null);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // zamknƒÖƒá okno mo≈ºna tylko przyciskiem "Wr√≥ƒá" lub
+																// podajƒÖc raz dobrƒÖ odpowiedz
+	}
+	
+	public void createImageParameters()
+	{
+		   imageZagadka1 = new ImagePanel1();
+		   imageZagadka1.setBounds(50, 30, 1000, 500);
+		   add(imageZagadka1);
+	}
+	
+	public void createLabelGiveAnswer()
+	{
+		odpZagadka1 = new JLabel("Podaj odpowied≈∫:  ");
+		odpZagadka1.setBounds(50, 550, 180, 30);
+		odpZagadka1.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(odpZagadka1);
+	}
+	
+	public void createLabelAnswerTrue()
+	{
+		odpTrue = new JLabel("Odpowied≈∫ poprawna!");
+		odpTrue.setBounds(50, 600, 180, 30);
+		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		odpTrue.setVisible(false);
+		add(odpTrue);
+		
+	}
+	
+	
+	public void createLabelAwswerWrong()
+	{
+		odpWrong = new JLabel("To nie to! Przemy≈õl i spr√≥buj ponownie!");
+		odpWrong.setBounds(400, 600, 350, 30);
+		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		odpWrong.setForeground(Color.RED);
+		odpWrong.setVisible(false);
+		add(odpWrong);
+		
+	}
+	
+	public void createTextFieldToEnterAnswer()
+	{
+		tAnswer = new JTextField();
+		tAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(wynik)) {
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
+				} else
+					odpWrong.setVisible(true);
+			}
+		});
 
+		   tAnswer.setBounds(250, 550, 100, 30);
+		   tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
+		   tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+	       add(tAnswer);
+	}
+	
+	public void createButtonPrompt()
+	{
+	       bPrompt = new JButton("Podpowied≈∫");
+	       bPrompt.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					lPrompt.setVisible(true);
 				}
-
-			}
-		});
-     
-	   tOdpowiedü.setBounds(250, 550, 100, 30);
-	   tOdpowiedü.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   tOdpowiedü.setLayout(new FlowLayout(FlowLayout.CENTER));
-       add(tOdpowiedü);
-       
-       //moøna skorzystaÊ z podpowiedzi, w przypadku problemÛw z rozwiπzaniem zadania
-       bPodpowiedü = new JButton("Podpowiedü");
-	   bPodpowiedü.addActionListener(new ActionListener() {
+			});
+	       bPrompt.setBounds(400, 550, 120, 25);
+	       add(bPrompt);
+	}
+	
+	public void createTextAreaWithPrompt()
+	{
+		lPrompt = new JTextArea("Skorupa ≈õlimaka, to przyk≈Çad boskiej proporcji w przyrodzie (lub z≈Çotego podzia≈Çu), "
+				+ "\nzwr√≥ƒá uwagƒô na ciƒÖg liczbowy i skojarz go z popularnym ciƒÖgiem okre≈õlonym przez "
+				+ "\nw≈Çoskiego matematyka z Pizy w 1202 r.,"
+				+ "\nkt√≥ry nazywa≈Ç siƒô Fibonacci, a w jego ciƒÖgu pierwsza + druga cyfra daje trzeciƒÖ"
+				+ "\ndruga + trzecia daje czwartƒÖ i tak dalej."); // podpowiedzi wy≈õwietlajƒÖ siƒô po jednej linijce,
+																	// stopniowo coraz bardziej szczeg√≥≈Çowo, mozna
+																	// przewijaƒá scrollem
+		lPrompt.setVisible(false); // podpowied≈∫ widocznna po klikniƒôciu przycisku na ≈ºyczenie gracza
+		sPrompt = new JScrollPane(lPrompt);
+		sPrompt.setBounds(530, 550, 500, 22);
+		add(sPrompt);
+	}
+	
+	public void createButtonConfirmingTheAnswer ()
+	{
+		//przycisk Potwierd≈∫ mo≈ºe byƒá u≈ºyty tylko raz, p√≥zniej zostaje ukryty i pojawia siƒô komunikat o poprawnej odpowiedzi
+		bAnswer = new JButton("Potwierd≈∫");
+		bAnswer.setVisible(true);
+		bAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				lPodpowiedü.setVisible(true);
-			}
-		});
-       bPodpowiedü.setBounds(400, 550, 120, 25);
-       add(bPodpowiedü);
-       
-       lPodpowiedü = new JTextArea("Skorupa úlimaka, to przyk≥ad boskiej proporcji w przyrodzie (lub z≥otego podzia≥u), "
-          		+ "\nzwrÛÊ uwagÍ na ciπg liczbowy i skojarz go z popularnym ciπgiem okreúlonym przez "
-           		+ "\nw≥oskiego matematyka z Pizy w 1202 r.,"
-           		+ "\nktÛry nazywa≥ siÍ Fibonacci, a w jego ciπgu pierwsza + druga cyfra daje trzeciπ"
-           		+ "\ndruga + trzecia daje czwartπ i tak dalej."); // podpowiedzi wyúwietlajπ siÍ po jednej linijce, stopniowo coraz bardziej szczegÛ≥owo, mozna przewijaÊ scrollem
-       lPodpowiedü.setVisible(false); //podpowiedü widocznna po klikniÍciu przycisku na øyczenie gracza
-       sPodpowiedü = new JScrollPane(lPodpowiedü);
-       sPodpowiedü.setBounds(530, 550, 500, 22);
-	   add(sPodpowiedü);
-	   
-	   //przyciski potwierdzajπce odpowiedz lub zamykajπce okno i powrÛt do g≥Ûwnego ekranu, 
-	   //przycisk Potwierdü moøe byÊ uøyty tylko raz, pÛzniej zostaje ukryty i pojawia siÍ komunikat o poprawnej odpowiedzi
-	   bOdp = new JButton("Potwierdü");
-	   bOdp.setVisible(true);
-	   bOdp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (getOdp().equals(wynik)) {
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
-
-				}
-
+				} else
+					odpWrong.setVisible(true);
 			}
 		});
-	   bOdp.setBounds(50, 600, 120, 25);
-	   add(bOdp);
-	   
-	   bCancel = new JButton("WrÛÊ");
-	   bCancel.addActionListener(new ActionListener() {
+		bAnswer.setBounds(50, 600, 120, 25);
+		add(bAnswer);
+		
+	}
+	
+	public void createButtonToCancel()
+	{
+		bCancel = new JButton("Wr√≥ƒá");
+		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				okData = false;
 				setVisible(false);
 			}
 		});
-	   bCancel.setBounds(200, 600, 120, 25);
-	   add(bCancel);
-
+		bCancel.setBounds(200, 600, 120, 25);
+		add(bCancel);
 	}
 	
-	
-	//Funkcje do wspÛ≥pracy g≥Ûwnego okna gry i okna dialogowego
+	//Funkcje do wsp√≥≈Çpracy g≈Ç√≥wnego okna gry i okna dialogowego
 	public String getOdp() {
-		return tOdpowiedü.getText();
+		return tAnswer.getText();
 	}
     
 	public void setFocus() {
-		tOdpowiedü.requestFocusInWindow();
+		tAnswer.requestFocusInWindow();
 
 	}
     
@@ -149,7 +203,7 @@ public class Zagadka extends JDialog {
     
 }
 
-//klasa do dodawania obrazÛw do programu, jak w oknie g≥Ûwnym
+//klasa do dodawania obraz√≥w do programu, jak w oknie g≈Ç√≥wnym
 class ImagePanel1 extends JPanel {
 
 	private BufferedImage imageZagadka1;

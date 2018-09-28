@@ -1,4 +1,5 @@
 package pl.gra.zagadki;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -19,112 +20,156 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-//zasada dzia≥ania analogiczna jak w klasie Zagadka
+//zasada dzia≈Çania analogiczna jak w klasie Zagadka
 
 public class Zagadka2 extends JDialog {
 	
-	private JTextField tOdpowiedü;
-	private JButton bPodpowiedü, bOdp, bCancel;
+	private JTextField tAnswer;
+	private JButton bPrompt, bAnswer, bCancel;
 	private JPanel imageZagadka2;
-	private JLabel odpZagadka2, odpPoprawna;
-	private JTextArea lPodpowiedü;
-	private JScrollPane sPodpowiedü;
+	private JLabel odpZagadka2, odpTrue, odpWrong;
+	private JTextArea lPrompt;
+	private JScrollPane sPrompt;
 	private boolean okData ;
-	private static final String wynik = "1";
+	private static final String result = "1";
 	
 	public Zagadka2(JFrame owner) {
-	   super(owner, "Zagadka2", true);
-	   setBounds(150, 150, 1120, 700);
-	   setLayout(null);
-	   setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		super(owner, "Zagadka2", true);
 
-	   imageZagadka2 = new ImagePanel2();
-	   imageZagadka2.setBounds(50, 30, 1000, 500);
-	   add(imageZagadka2);
+		setZagadka2Parametres();
+		createImageParameters();
+		createLabelGiveAnswer();
+		createLabelAnswerTrue();
+		createLabelAwswerWrong();
+		createTextFieldToEnterAnswer();
+		createButtonPrompt();
+		createTextAreaWithPrompt();
+		createButtonConfirmingTheAnswer();
+		createButtonToCancel();
+	}
 	   
-	   odpZagadka2 = new JLabel("Podaj odpowiedü:  ");
-	   odpZagadka2.setBounds(50, 550, 180, 30);
-	   odpZagadka2.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   add(odpZagadka2);
+	public void setZagadka2Parametres() {
+		setBounds(150, 150, 1120, 700);
+		setLayout(null);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+	}
 	   
-	   odpPoprawna = new JLabel("Odpowiedü poprawna!");
-	   odpPoprawna.setBounds(50, 600, 180, 30);
-	   odpPoprawna.setFont(new Font("SansSerif", Font.PLAIN ,14));
-	   odpPoprawna.setVisible(false);
-	   add(odpPoprawna);
-       
-	   tOdpowiedü = new JTextField();
-	  
-	   tOdpowiedü.addActionListener(new ActionListener() {
+	public void createImageParameters() {
+		imageZagadka2 = new ImagePanel2();
+		imageZagadka2.setBounds(50, 30, 1000, 500);
+		add(imageZagadka2);
+	}
+	   
+	public void createLabelGiveAnswer() {
+		odpZagadka2 = new JLabel("Podaj odpowied≈∫:  ");
+		odpZagadka2.setBounds(50, 550, 180, 30);
+		odpZagadka2.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(odpZagadka2);
+	}
+	   
+	public void createLabelAnswerTrue() {
+		odpTrue = new JLabel("Odpowied≈∫ poprawna!");
+		odpTrue.setBounds(50, 600, 180, 30);
+		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		odpTrue.setVisible(false);
+		add(odpTrue);
+	}
+	
+	public void createLabelAwswerWrong()
+	{
+		odpWrong = new JLabel("To nie to! Przemy≈õl i spr√≥buj ponownie!");
+		odpWrong.setBounds(400, 600, 350, 30);
+		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		odpWrong.setForeground(Color.RED);
+		odpWrong.setVisible(false);
+		add(odpWrong);
+		
+	}
+	   
+	public void createTextFieldToEnterAnswer() {
+		tAnswer = new JTextField();
+		tAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(wynik)) {
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
-				}
+				} else
+					odpWrong.setVisible(true);
 			}
 		});
 
-	   tOdpowiedü.setBounds(250, 550, 100, 30);
-	   tOdpowiedü.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   tOdpowiedü.setLayout(new FlowLayout(FlowLayout.CENTER));
-       add(tOdpowiedü);
+		tAnswer.setBounds(250, 550, 100, 30);
+		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
+		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+		add(tAnswer);
+	}
        
-       bPodpowiedü = new JButton("Podpowiedü");
-	   bPodpowiedü.addActionListener(new ActionListener() {
+	public void createButtonPrompt() {
+		bPrompt = new JButton("Podpowied≈∫");
+		bPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				lPodpowiedü.setVisible(true);
+				lPrompt.setVisible(true);
 			}
 		});
-       bPodpowiedü.setBounds(400, 550, 120, 25);
-       add(bPodpowiedü);
-       
-       lPodpowiedü = new JTextArea("Przyjrzyj sie umiejscowieniu znakÛw na klawiaturze komputera");
-       lPodpowiedü.setVisible(false);
-       sPodpowiedü = new JScrollPane(lPodpowiedü);
-       sPodpowiedü.setBounds(530, 550, 500, 22);
-	   add(sPodpowiedü);
+		bPrompt.setBounds(400, 550, 120, 25);
+		add(bPrompt);
+	}
 	   
-	   bOdp = new JButton("Potwierdü");
-	   bOdp.setVisible(true);
-	   bOdp.addActionListener(new ActionListener() {
+	public void createTextAreaWithPrompt() {
+		lPrompt = new JTextArea("Przyjrzyj sie umiejscowieniu znak√≥w na klawiaturze komputera");
+		lPrompt.setVisible(false);
+		sPrompt = new JScrollPane(lPrompt);
+		sPrompt.setBounds(530, 550, 500, 22);
+		add(sPrompt);
+	}
+	   
+	public void createButtonConfirmingTheAnswer() {
+		bAnswer = new JButton("Potwierd≈∫");
+		bAnswer.setVisible(true);
+		bAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(wynik)) {
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
-				}
+				} else
+					odpWrong.setVisible(true);
 			}
 		});
-	   bOdp.setBounds(50, 600, 120, 25);
-	   add(bOdp);
+		bAnswer.setBounds(50, 600, 120, 25);
+		add(bAnswer);
+	}
 	   
-	   bCancel = new JButton("WrÛÊ");
-	   bCancel.addActionListener(new ActionListener() {
+	public void createButtonToCancel() {
+		bCancel = new JButton("Wr√≥ƒá");
+		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				okData = false;
 				setVisible(false);
 			}
 		});
-	   bCancel.setBounds(200, 600, 120, 25);
-	   add(bCancel);
-
+		bCancel.setBounds(200, 600, 120, 25);
+		add(bCancel);
 	}
+	
 
 	public String getOdp() {
-		return tOdpowiedü.getText();
+		return tAnswer.getText();
 	}
 
 	public void setFocus() {
-		tOdpowiedü.requestFocusInWindow();
+		tAnswer.requestFocusInWindow();
 	}
 
 	public boolean isOK() {

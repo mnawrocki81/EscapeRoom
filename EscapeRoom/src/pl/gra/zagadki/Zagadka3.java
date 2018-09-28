@@ -1,4 +1,5 @@
 package pl.gra.zagadki;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -23,131 +24,175 @@ import javax.swing.event.*;
 
 public class Zagadka3 extends JDialog {
 	
-	private JTextField tOdpowiedü;
-	private JButton bPodpowiedü, bOdp, bCancel;
+	private JTextField tAnswer;
+	private JButton bPrompt, bAnswer, bCancel;
 	private JPanel imageZagadka3;
-	private JLabel odpZagadka3, odpPoprawna;
-	private JTextArea lPodpowiedü;
-	private JScrollPane sPodpowiedü;
-	private JSlider suwak;
+	private JLabel odpZagadka3, odpTrue, odpWrong;
+	private JTextArea lPrompt;
+	private JScrollPane sPrompt;
+	private JSlider slider;
 	private boolean okData;
-	private static final String wynik = "6";
+	private static final String result = "6";
 	
 	public Zagadka3(JFrame owner) {
 	   super(owner, "Zagadka3", true);
-	   setBounds(150, 150, 1120, 700);
-	   setLayout(null);
-	   setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+	   
+	   setZagadka3Parametres ();
+	   createImageParameters();
+	   createLabelGiveAnswer();
+	   createLabelAnswerTrue();
+	   createLabelAwswerWrong();
+	   createSliderToEnterAnswer();
+	   createTextFieldToEnterAnswer();
+	   createButtonPrompt();
+	   createTextAreaWithPrompt();
+	   createButtonConfirmingTheAnswer ();
+	   createButtonToCancel();
+	}
+	
+	public void setZagadka3Parametres() {
+		setBounds(150, 150, 1120, 700);
+		setLayout(null);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+	}
 
-	   imageZagadka3 = new ImagePanel3();
-	   imageZagadka3.setBounds(50, 30, 1000, 500);
-	   add(imageZagadka3);
+	public void createImageParameters() {
+		imageZagadka3 = new ImagePanel3();
+		imageZagadka3.setBounds(50, 30, 1000, 500);
+		add(imageZagadka3);
+	}
+	
+	public void createLabelAnswerTrue() {
+		odpTrue = new JLabel("Odpowied≈∫ poprawna!");
+		odpTrue.setBounds(50, 600, 180, 30);
+		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		odpTrue.setVisible(false);
+		add(odpTrue);
+	}
+	
+	public void createLabelAwswerWrong()
+	{
+		odpWrong = new JLabel("To nie to! Przemy≈õl i spr√≥buj ponownie!");
+		odpWrong.setBounds(470, 600, 350, 30);
+		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		odpWrong.setForeground(Color.RED);
+		odpWrong.setVisible(false);
+		add(odpWrong);
+		
+	}
 	   
-	   odpPoprawna = new JLabel("Odpowiedü poprawna!");
-	   odpPoprawna.setBounds(50, 600, 180, 30);
-	   odpPoprawna.setFont(new Font("SansSerif", Font.PLAIN ,14));
-	   odpPoprawna.setVisible(false);
-	   add(odpPoprawna);
-	   
-	   //suwak u≥atwiajπcy podanie odpowiedzi, ktÛra jest liczbπ od 0 do 10
-	   suwak  = new JSlider(0,10,0);
-	   suwak.setBounds(250, 550, 200, 50);
-	   suwak.addChangeListener(new ChangeListener() {
+	public void createSliderToEnterAnswer() {
+		slider = new JSlider(0, 10, 0);
+		slider.setBounds(250, 550, 200, 50);
+		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 
-				tOdpowiedü.setText("" + suwak.getValue());
+				tAnswer.setText("" + slider.getValue());
 				setFocus();
 			}
 		});
-	   //ustawienie suwaka , podzia≥ki , etykiet,  dosuwania do najbliøszej kreski, 
-	   suwak.setPaintTicks(true);
-	   suwak.setPaintLabels(true);
-	   suwak.setSnapToTicks(true); 
-	   suwak.setMajorTickSpacing(1);
-	   add(suwak);
-	    
-	   
-	   odpZagadka3 = new JLabel("Podaj odpowiedü:  ");
-	   odpZagadka3.setBounds(50, 550, 180, 30);
-	   odpZagadka3.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   add(odpZagadka3);
-       
-	   tOdpowiedü = new JTextField();
-	   tOdpowiedü.addActionListener(new ActionListener() {
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setSnapToTicks(true);
+		slider.setMajorTickSpacing(1);
+		add(slider);
+	}
+
+	public void createLabelGiveAnswer() {
+		odpZagadka3 = new JLabel("Podaj odpowied≈∫:  ");
+		odpZagadka3.setBounds(50, 550, 180, 30);
+		odpZagadka3.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(odpZagadka3);
+	}
+
+	public void createTextFieldToEnterAnswer() {
+		tAnswer = new JTextField();
+		tAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(wynik)) {
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					suwak.setEnabled(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					slider.setEnabled(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
-				}
-			}
-
-		});
-
-	   tOdpowiedü.setBounds(470, 550, 100, 30);
-	   tOdpowiedü.setFont(new Font("SansSerif", Font.BOLD, 20));
-	   tOdpowiedü.setLayout(new FlowLayout(FlowLayout.CENTER));
-       add(tOdpowiedü);
-       
-       bPodpowiedü = new JButton("Podpowiedü");
-	   bPodpowiedü.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				lPodpowiedü.setVisible(true);
+				} else
+					odpWrong.setVisible(true);
 			}
 		});
-       bPodpowiedü.setBounds(600, 550, 120, 25);
-       add(bPodpowiedü);
-       
-       lPodpowiedü = new JTextArea("Przeczytaj liczby, zwrÛÊ uwagÍ na t≥o \nskojarz liczby z alfabetem. ");
-       lPodpowiedü.setVisible(false);
-       sPodpowiedü = new JScrollPane(lPodpowiedü);
-       sPodpowiedü.setBounds(730, 550, 300, 22);
-	   add(sPodpowiedü);
-	   
-	   bOdp = new JButton("Potwierdü");
-	   bOdp.setVisible(true);
-	   bOdp.addActionListener(new ActionListener() {
+
+		tAnswer.setBounds(470, 550, 100, 30);
+		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
+		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+		add(tAnswer);
+	}
+
+	public void createButtonPrompt() {
+		bPrompt = new JButton("Podpowied≈∫");
+		bPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(wynik)) {
+				lPrompt.setVisible(true);
+			}
+		});
+		bPrompt.setBounds(600, 550, 120, 25);
+		add(bPrompt);
+	}
+       
+	public void createTextAreaWithPrompt() {
+
+		lPrompt = new JTextArea("Przeczytaj liczby, zwr√≥ƒá uwagƒô na t≈Ço \nskojarz liczby z alfabetem. ");
+		lPrompt.setVisible(false);
+		sPrompt = new JScrollPane(lPrompt);
+		sPrompt.setBounds(730, 550, 300, 22);
+		add(sPrompt);
+	}
+
+	public void createButtonConfirmingTheAnswer() {
+
+		bAnswer = new JButton("Potwierd≈∫");
+		bAnswer.setVisible(true);
+		bAnswer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (getOdp().equals(result)) {
 					okData = true;
-					tOdpowiedü.setEditable(false);
-					suwak.setEnabled(false);
-					odpPoprawna.setVisible(true);
-					bOdp.setVisible(false);
+					tAnswer.setEditable(false);
+					slider.setEnabled(false);
+					odpTrue.setVisible(true);
+					odpWrong.setVisible(false);
+					bAnswer.setVisible(false);
 					setVisible(false);
-
-				}
-
+				} else
+					odpWrong.setVisible(true);
 			}
 		});
-	   bOdp.setBounds(50, 600, 120, 25);
-	   add(bOdp);
-	   
-	   bCancel = new JButton("WrÛÊ");
-	   bCancel.addActionListener(new ActionListener() {
+		bAnswer.setBounds(50, 600, 120, 25);
+		add(bAnswer);
+	}
+
+	public void createButtonToCancel() {
+		bCancel = new JButton("Wr√≥ƒá");
+		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				okData = false;
 				setVisible(false);
 			}
 		});
-	   bCancel.setBounds(200, 600, 120, 25);
-	   add(bCancel);
+		bCancel.setBounds(200, 600, 120, 25);
+		add(bCancel);
 
 	}
 
 	public String getOdp() {
-		return tOdpowiedü.getText();
+		return tAnswer.getText();
 	}
 
 	public void setFocus() {
-		tOdpowiedü.requestFocusInWindow();
+		tAnswer.requestFocusInWindow();
 
 	}
 

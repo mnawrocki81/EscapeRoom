@@ -15,9 +15,9 @@ public class EscapeRoom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OknoGry pocz¹tek = new OknoGry();
-					pocz¹tek.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					pocz¹tek.setVisible(true);
+					OknoGry beginning = new OknoGry();
+					beginning.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					beginning.setVisible(true);
 
 				} catch (Exception e) {
 					e.printStackTrace();
