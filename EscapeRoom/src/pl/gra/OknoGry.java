@@ -92,7 +92,7 @@ public class OknoGry extends EscapeRoom {
 		});
 		bstart.setFont(new Font("SansSerif", Font.BOLD, 20));
 		bstart.setBounds(500, 300, 200, 50);
-		add (bstart);
+		add (bstart); 
 	}
 	
 	public void createLabelTitle()

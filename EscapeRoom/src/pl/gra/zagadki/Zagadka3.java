@@ -78,7 +78,6 @@ public class Zagadka3 extends JDialog {
 		odpWrong.setForeground(Color.RED);
 		odpWrong.setVisible(false);
 		add(odpWrong);
-		
 	}
 	   
 	public void createSliderToEnterAnswer() {

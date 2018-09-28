@@ -56,7 +56,7 @@ public class Zagadka extends JDialog {
 		setLayout(null);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // zamknąć okno można tylko przyciskiem "Wróć" lub
 																// podając raz dobrą odpowiedz
-	}
+	} 
 	
 	public void createImageParameters()
 	{

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
  * @author mnawrocki
  *
  */
+
 public class EscapeRoom extends JFrame {
 
 	public static void main(String[] args) {

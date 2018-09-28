@@ -174,7 +174,7 @@ public class Zagadka2 extends JDialog {
 
 	public boolean isOK() {
 		return okData;
-	}
+	} 
 
 }
 
