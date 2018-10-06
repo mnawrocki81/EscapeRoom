@@ -8,9 +8,12 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+import pl.gra.zagadki.Box;
+import pl.gra.zagadki.Letter;
 import pl.gra.zagadki.Zagadka;
 import pl.gra.zagadki.Zagadka2;
 import pl.gra.zagadki.Zagadka3;
+import pl.gra.zagadki.Zagadka4;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -28,7 +31,7 @@ import java.awt.event.ActionEvent;
 public class OknoGry extends EscapeRoom {
 
 	private JPanel background, image;
-	private JButton bstart, bSwitch, zagadka1, zagadka2, zagadka3;
+	private JButton bstart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, bLetter, bBox;
 	private JLabel ltitle, lcounter, lcounter1,komunikat,odpowiedzi,enterCode;
 	private JTextArea ltekst;
 	private JTextField code;
@@ -40,6 +43,9 @@ public class OknoGry extends EscapeRoom {
 	private Zagadka fib;
 	private Zagadka2 znaki;
 	private Zagadka3 liczby;
+	private Zagadka4 clock;
+	private Letter letter;
+	private Box box;
 
 	public OknoGry() {
 		
@@ -53,6 +59,9 @@ public class OknoGry extends EscapeRoom {
 		createFirstRiddle ();
 		createSecondRiddle();
 		createThirdRiddle();
+		createFourthRiddle();
+		createButtonLetter();
+		createButtonBox();
 		createLabelBeforeTheTimer();
 		createLabelCountdownOfTime();
 		createLabelMessageToTheCounter();
@@ -141,9 +150,12 @@ public class OknoGry extends EscapeRoom {
 				background.setVisible(false);
 				bSwitch.setVisible(false);
 				image.setVisible(true);
-				zagadka1.setVisible(true);
-				zagadka2.setVisible(true);
-				zagadka3.setVisible(true);
+				bZagadka1.setVisible(true);
+				bZagadka2.setVisible(true);
+				bZagadka3.setVisible(true);
+				bZagadka4.setVisible(true);
+				bLetter.setVisible(true);
+				bBox.setVisible(true);
 			}
 		});
 		bSwitch.setToolTipText("Włącz światło"); 
@@ -157,8 +169,8 @@ public class OknoGry extends EscapeRoom {
 	
 	public void createFirstRiddle ()
 	{
-		zagadka1 = new JButton("Zagadka1");
-		zagadka1.addActionListener(new ActionListener() {
+		bZagadka1 = new JButton("Zagadka1");
+		bZagadka1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 //otwarcie okna dialogowego z zagadką 
 				if (fib == null) {
@@ -176,15 +188,15 @@ public class OknoGry extends EscapeRoom {
 				text = 	odpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text									
 			}
 		});
-		zagadka1.setBounds(300,400, 100,30);
-		zagadka1.setVisible(false);
-		add(zagadka1);
+		bZagadka1.setBounds(300,400, 100,30);
+		bZagadka1.setVisible(false);
+		add(bZagadka1);
 	}
 	
 	public void createSecondRiddle()
 	{
-		zagadka2 = new JButton("Zagadka2");
-		zagadka2.addActionListener(new ActionListener() {
+		bZagadka2 = new JButton("Zagadka2");
+		bZagadka2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (znaki == null) {
@@ -201,15 +213,15 @@ public class OknoGry extends EscapeRoom {
 					
 			}
 		});
-		zagadka2.setBounds(400,300, 100,30);
-		zagadka2.setVisible(false);
-		add(zagadka2);
+		bZagadka2.setBounds(400,300, 100,30);
+		bZagadka2.setVisible(false);
+		add(bZagadka2);
 	}
 	
 	public void createThirdRiddle()
 	{
-		zagadka3 = new JButton("Zagadka3");
-		zagadka3.addActionListener(new ActionListener() {
+		bZagadka3 = new JButton("Zagadka3");
+		bZagadka3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (liczby == null) {
@@ -227,10 +239,78 @@ public class OknoGry extends EscapeRoom {
 				
 			}
 		});
-		zagadka3.setBounds(500,200, 100,30);
-		zagadka3.setVisible(false);
-		add(zagadka3);
+		bZagadka3.setBounds(500,200, 100,30);
+		bZagadka3.setVisible(false);
+		add(bZagadka3);
 	}
+	
+	public void createFourthRiddle()
+	{
+		bZagadka4 = new JButton("Zagadka4");
+		bZagadka4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (clock == null) {
+					clock = new Zagadka4 (null);
+				}
+				
+				clock.setVisible(true);
+				clock.setFocus();
+				
+				if (clock.isOK()) {
+					odpowiedzi.setText(text + clock.getOdp());
+				}
+			
+				text = 	odpowiedzi.getText() + "   "; 	
+				
+			}
+		});
+		bZagadka4.setBounds(700,150, 100,30);
+		bZagadka4.setVisible(false);
+		add(bZagadka4);
+	
+	}
+	public void createButtonLetter ()
+	{
+		bLetter = new JButton("List");
+		bLetter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (letter == null) {
+					letter = new Letter(null);
+				}
+				
+				letter.setVisible(true);
+									
+			}
+		});
+		bLetter.setBounds(600,250, 100,30);
+		bLetter.setVisible(false);
+		add(bLetter);
+		
+	}
+	
+	
+	public void createButtonBox()
+	{
+		bBox = new JButton("Skrzynka");
+		bBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (box == null) {
+					box = new Box(null);
+				}
+				
+				box.setVisible(true);
+									
+			}
+		});
+		bBox.setBounds(700,300, 100,30);
+		bBox.setVisible(false);
+		add(bBox);
+		
+	}
+	
 	
 	public void createLabelBeforeTheTimer()
 	{
@@ -288,7 +368,7 @@ public class OknoGry extends EscapeRoom {
 
 				if (i < 60) {
 					if (i < 0) {
-						tm.stop(); // zatrzymanie timera
+						tm.stop(); 
 						komunikat.setText("Czas minął nie udało ci się wyjść!");
 						code.setEditable(false); // po upłynięciu czasu, nie można już wpisać odpowiedzi
 					}
@@ -365,7 +445,7 @@ class ImagePanel0 extends JPanel {
 
 	}
 
-	// @Override
+	@Override
 	public void paintComponent(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g;
