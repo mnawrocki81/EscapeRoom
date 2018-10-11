@@ -1,42 +1,35 @@
 package pl.gra;
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
-
 import pl.gra.zagadki.Box;
 import pl.gra.zagadki.Letter;
 import pl.gra.zagadki.Zagadka;
 import pl.gra.zagadki.Zagadka2;
 import pl.gra.zagadki.Zagadka3;
 import pl.gra.zagadki.Zagadka4;
-
-import javax.imageio.ImageIO;
+import pl.gra.zagadki.Zagadka5;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class OknoGry extends EscapeRoom {
 
-	private JPanel background, image;
-	private JButton bstart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, bLetter, bBox;
-	private JLabel ltitle, lcounter, lcounter1,komunikat,odpowiedzi,enterCode;
-	private JTextArea ltekst;
+	private JButton bstart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, 
+	bPrompt, bZagadka5, bLetter, bBox, bExitCode;
+	private JLabel blackroom, imageroom, ltitle, lcounter, lcounter1,komunikat,odpowiedzi;
+	private JTextArea ltekst, lPrompt;
 	private JTextField code;
+	private JScrollPane sPrompt;
 	private Timer tm;
-	private static final String exitCode = "156";
+	private static final String exitCode = "TEST";
 	private int i = 299;
 	private int minuty, sekundy;
 	private String text = "";
@@ -44,7 +37,9 @@ public class OknoGry extends EscapeRoom {
 	private Zagadka2 znaki;
 	private Zagadka3 liczby;
 	private Zagadka4 clock;
+	private Zagadka5 card;
 	private Letter letter;
+	private ExitCode panelexitCode;
 	private Box box;
 
 	public OknoGry() {
@@ -53,22 +48,25 @@ public class OknoGry extends EscapeRoom {
 		createButtonStart();
 		createLabelTitle();
 		createTextAboutAuthor();
-		createBlackBackground();
-		createImageParameters();
+		createBlackRoom();
+		createImageRoom();
 		createButtonSwitch();
 		createFirstRiddle ();
 		createSecondRiddle();
 		createThirdRiddle();
 		createFourthRiddle();
+		createFifthRiddle();
 		createButtonLetter();
 		createButtonBox();
 		createLabelBeforeTheTimer();
 		createLabelCountdownOfTime();
 		createLabelMessageToTheCounter();
 		createLabelToCopyResultsOfRiddles();
-		createLabelToWriteExitCode();
+		createButtonToWriteExitCode();
 		createTimer();
 		createTextFieltToEnterExitCode();
+		createButtonPrompt();
+		createTextAreaWithPrompt();
 		
 	}
 	
@@ -88,13 +86,14 @@ public class OknoGry extends EscapeRoom {
 				ltitle.setVisible(false);
 				bstart.setVisible(false);
 				ltekst.setVisible(false);
-				background.setVisible(true);
+				blackroom.setVisible(true);
 				bSwitch.setVisible(true);
 				lcounter.setVisible(true);
 				lcounter1.setVisible(true);
 				komunikat.setVisible(true);
 				odpowiedzi.setVisible(true);
-				enterCode.setVisible(true);
+				bPrompt.setVisible(true);
+				sPrompt.setVisible(true);
 				code.setVisible(true);
 				tm.start();
 			}
@@ -125,21 +124,20 @@ public class OknoGry extends EscapeRoom {
 		
 	}
 	
-	public void createBlackBackground()
+	public void createBlackRoom()
 	{
-		background = new JPanel();
-		background.setBounds(50, 50, 1100, 500);
-		background.setBackground(Color.black);
-		background.setVisible(false);
-		add(background);
+		blackroom = new JLabel(new ImageIcon("images/blackroom.jpg"));
+		blackroom.setBounds(50, 50, 1100, 500);
+		blackroom.setVisible(false);
+		add(blackroom);
 	}
 	
-	public void createImageParameters()
+	public void createImageRoom()
 	{
-		image = new ImagePanel0();
-		image.setBounds(50, 50, 1100, 500);
-		image.setVisible(false);
-		add(image);
+		imageroom = new JLabel(new ImageIcon("images/obraztest.jpg"));
+		imageroom.setBounds(50, 50, 1100, 500);
+		imageroom.setVisible(false);
+		add(imageroom);
 	}
 	
 	public void createButtonSwitch()
@@ -147,20 +145,20 @@ public class OknoGry extends EscapeRoom {
 		bSwitch = new JButton();
 		bSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				background.setVisible(false);
+				blackroom.setVisible(false);
 				bSwitch.setVisible(false);
-				image.setVisible(true);
+				imageroom.setVisible(true);
 				bZagadka1.setVisible(true);
 				bZagadka2.setVisible(true);
 				bZagadka3.setVisible(true);
 				bZagadka4.setVisible(true);
+				bZagadka5.setVisible(true);
 				bLetter.setVisible(true);
 				bBox.setVisible(true);
 			}
 		});
 		bSwitch.setToolTipText("Włącz światło"); 
 		bSwitch.setBackground(Color.black);
-
 		bSwitch.setForeground(Color.black);
 		bSwitch.setBounds(1000, 200, 10, 5);
 		bSwitch.setVisible(false);
@@ -185,7 +183,10 @@ public class OknoGry extends EscapeRoom {
 					odpowiedzi.setText(text + fib.getOdp()); // dodanie poprawnej odpowiedzi do notatnika JLabel
 				}
 			
-				text = 	odpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text									
+				text = 	odpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text
+				
+				if (text.length()==20)
+					bExitCode.setVisible(true);
 			}
 		});
 		bZagadka1.setBounds(300,400, 100,30);
@@ -209,9 +210,12 @@ public class OknoGry extends EscapeRoom {
 				if (znaki.isOK()) {
 					odpowiedzi.setText(text + znaki.getOdp());
 				}
-				text = odpowiedzi.getText() + "   ";
-					
-			}
+				text = odpowiedzi.getText() + "   ";	
+				
+				if (text.length()==20)
+					bExitCode.setVisible(true);
+				
+				}
 		});
 		bZagadka2.setBounds(400,300, 100,30);
 		bZagadka2.setVisible(false);
@@ -237,6 +241,8 @@ public class OknoGry extends EscapeRoom {
 			
 				text = 	odpowiedzi.getText() + "   "; 	
 				
+				if (text.length()==20)
+					bExitCode.setVisible(true);
 			}
 		});
 		bZagadka3.setBounds(500,200, 100,30);
@@ -263,6 +269,8 @@ public class OknoGry extends EscapeRoom {
 			
 				text = 	odpowiedzi.getText() + "   "; 	
 				
+				if (text.length() == 20)
+					bExitCode.setVisible(true);
 			}
 		});
 		bZagadka4.setBounds(700,150, 100,30);
@@ -270,6 +278,37 @@ public class OknoGry extends EscapeRoom {
 		add(bZagadka4);
 	
 	}
+	
+	public void createFifthRiddle() 
+	{
+		bZagadka5 = new JButton("Zagadka5");
+		bZagadka5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (card == null) {
+					card = new Zagadka5 (null);
+				}
+				
+				card.setVisible(true);
+				card.setFocus();
+				
+				if (card.isOK()) {
+					odpowiedzi.setText(text + card.getOdp());
+				}
+			
+				text = 	odpowiedzi.getText() + "   "; 
+				
+				if (text.length()==20)
+					bExitCode.setVisible(true);
+								
+			}
+		});
+		bZagadka5.setBounds(800,450, 100,30);
+		bZagadka5.setVisible(false);
+		add(bZagadka5);
+		
+	}
+	
 	public void createButtonLetter ()
 	{
 		bLetter = new JButton("List");
@@ -279,7 +318,7 @@ public class OknoGry extends EscapeRoom {
 				if (letter == null) {
 					letter = new Letter(null);
 				}
-				
+
 				letter.setVisible(true);
 									
 			}
@@ -307,8 +346,7 @@ public class OknoGry extends EscapeRoom {
 		});
 		bBox.setBounds(700,300, 100,30);
 		bBox.setVisible(false);
-		add(bBox);
-		
+		add(bBox);	
 	}
 	
 	
@@ -333,7 +371,7 @@ public class OknoGry extends EscapeRoom {
 	public void createLabelMessageToTheCounter()
 	{		
 		komunikat = new JLabel("  ");
-		komunikat.setBounds(800, 670, 300, 50);
+		komunikat.setBounds(800, 650, 300, 50);
 		komunikat.setForeground(Color.RED);
 		komunikat.setFont(new Font("SansSerif", Font.BOLD, 17));
 		komunikat.setVisible(false);
@@ -349,15 +387,34 @@ public class OknoGry extends EscapeRoom {
 		add(odpowiedzi);
 	}
 	
-	public void createLabelToWriteExitCode()
+	public void createButtonToWriteExitCode()
 	{
-		enterCode = new JLabel("Wpisz kod:  ");
-		enterCode.setBounds(50, 670, 300,50);
-		enterCode.setFont(new Font("SansSerif", Font.BOLD, 20));
-		enterCode.setVisible(false);
-		add(enterCode);	
+		bExitCode = new JButton("Wpisz kod");
+		bExitCode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (panelexitCode == null) {
+					panelexitCode = new ExitCode(null);
+				}
+				
+				panelexitCode.setVisible(true);
+				
+				if (panelexitCode.isOK()) {
+					code.setEditable(true);
+					code.setText(panelexitCode.getOdp());
+					code.requestFocusInWindow();
+				}
+			
+													
+			}
+		});
+		bExitCode.setBounds(50, 650, 200, 40);
+		bExitCode.setFont(new Font("SansSerif", Font.BOLD, 20));
+		bExitCode.setVisible(false);
+		add(bExitCode);
 	}
 	
+		
 	public void createTimer()
 	{
 		tm = new Timer(1000, new ActionListener() {
@@ -408,50 +465,55 @@ public class OknoGry extends EscapeRoom {
 		code = new JTextField();
 		code.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if (code.getText().equals(exitCode)) {
 					tm.stop();
-					komunikat.setText("Kod poprawny, udało Ci się wyjść");
+					komunikat.setText("Kod poprawny, udało Ci się wyjść!");
 					code.setEditable(false);
 				}
-				
+
 				else {
-					komunikat.setText("Kod błędny, próbuj dalej");
+					komunikat.setText("Kod błędny, próbuj dalej!");
 				}
-			
+
 			}
-	       });
-		code.setBounds(180, 670, 150, 40);
+		});
+		code.setBounds(265, 650, 150, 40);
 		code.setFont(new Font("SansSerif", Font.BOLD, 20));
 		code.setVisible(false);
+		code.setEditable(false);
 		add(code);
 	}
-}
-//klasa do dodawania obrazów do programu, 
-class ImagePanel0 extends JPanel {
+	
+	public void createButtonPrompt() {
+		bPrompt = new JButton("Podpowiedź");
+		bPrompt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-	private BufferedImage image;
-
-	public ImagePanel0() {
-		super();
-
-		File imageFile = new File("images/obraztest.jpg");
-		try {
-			image = ImageIO.read(imageFile);
-		} catch (IOException e) {
-			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
-		}
-
+				lPrompt.setVisible(true);
+			}
+		});
+		bPrompt.setBounds(50, 720, 120, 22);
+		bPrompt.setVisible(false);
+		add(bPrompt);
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(image, 0, 0, this);
-
+	   
+	public void createTextAreaWithPrompt() {
+		lPrompt = new JTextArea("Tu masz podpowiedzi do gry, korzystaj gdy nie wiesz co robić dalej,"
+				+ "\nkażda kolejna podpowiedź dotyczy kolejnego etapu gry "
+				+ "\nlub jest coraz bardziej szczegółowa!"
+				+ "\n"
+				+ "\nZnajdź włącznik światła!"
+				+ "\nZnajdź i przeczytaj list!"
+				+ "\nZnajdź w pokoju zagadki i rozwiąż je, jest ich 5!"
+				+ "\nPo rozwiązaniu zagadek będziesz mógł wpisać kod wyjścia!"
+				+ "\nZnajdź i otwórz skrzynke,"
+				+ "\ndo kodu do skrzynki potrzebujesz wyniku trzech konkretnych zagadek"
+				+ "\nw skrzynce znajdziesz wskazówke do ostateczneg hasła! ");
+		lPrompt.setVisible(false);
+		sPrompt = new JScrollPane(lPrompt);
+		sPrompt.setBounds(180, 720, 400, 22);
+		sPrompt.setVisible(false);
+		add(sPrompt);
 	}
-
 }
-
