@@ -1,23 +1,19 @@
 package pl.gra.zagadki;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
+
 
 public class Box extends JDialog {
 	
-	private JPanel imageBox1, imageBox2;
+	private JLabel imageBox1, imageBox2;
 	private JButton bOpen, bTake, bCancel;
 	private Envelope envelope;
 
@@ -25,7 +21,8 @@ public class Box extends JDialog {
 		   super(owner, "Box", true);
 		   
 		   setLetterParametres ();
-		   createImageParameters();
+		   createImage1Parameters();
+		   createImage2Parameters();
 		   createButtonOpenBox();
 		   createButtonTakeEnvelope();
 		   createButtonToCancel();
@@ -38,16 +35,22 @@ public class Box extends JDialog {
 		//setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
 	
-	public void  createImageParameters()
+	public void  createImage1Parameters()
 	{
-		imageBox1 = new ImagePanelBox1();
+		imageBox1 = new JLabel(new ImageIcon("images/skrzynka1.jpg"));
 		imageBox1.setBounds(50, 30, 1000, 500);
 		add(imageBox1);
 		
-		imageBox2 = new ImagePanelBox2();
+
+	}
+	
+	public void  createImage2Parameters()
+	{
+		imageBox2 = new JLabel(new ImageIcon("images/skrzynka2.jpg"));
 		imageBox2.setBounds(50, 30, 1000, 500);
 		imageBox2.setVisible(false);
 		add(imageBox2);
+		
 	}
 	
 	public void createButtonOpenBox() {
@@ -97,58 +100,5 @@ public class Box extends JDialog {
 		});
 		bCancel.setBounds(200, 600, 120, 25);
 		add(bCancel);
-	}
-}
-
-class ImagePanelBox1 extends JPanel {
-
-	private BufferedImage imageBox1;
-
-	public ImagePanelBox1() {
-		super();
-
-		File imageFileBox1 = new File("images/skrzynka1.jpg");
-
-		try {
-			imageBox1 = ImageIO.read(imageFileBox1);
-		} catch (IOException e) {
-			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-
-		Graphics2D box1 = (Graphics2D) g;
-		box1.drawImage(imageBox1, 0, 0, this);
-
-	}
-}
-
-class ImagePanelBox2 extends JPanel {
-
-	private BufferedImage imageBox2;
-
-	public ImagePanelBox2() {
-		super();
-
-		File imageFileBox2 = new File("images/skrzynka2.jpg");
-		try {
-			imageBox2 = ImageIO.read(imageFileBox2);
-		} catch (IOException e) {
-			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-
-		Graphics2D box2 = (Graphics2D) g;
-		box2.drawImage(imageBox2, 0, 0, this);
-
 	}
 }

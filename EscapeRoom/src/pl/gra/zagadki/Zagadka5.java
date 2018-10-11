@@ -1,40 +1,38 @@
 package pl.gra.zagadki;
+
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-//zasada działania analogiczna jak w klasie Zagadka
-
-public class Zagadka2 extends JDialog {
+public class Zagadka5 extends JDialog {
 	
-	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
-	private JLabel imageZagadka2,odpZagadka2, odpTrue, odpWrong;
+	private JLabel imageZagadka5,odpZagadka5, odpTrue, odpWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
+	private JComboBox <Integer> cbNumber;
 	private boolean okData ;
-	private static final String result = "1";
+	private static final String result = "2";
 	
-	public Zagadka2(JFrame owner) {
-		super(owner, "Zagadka2", true);
+	public Zagadka5(JFrame owner) {
+		super(owner, "Zagadka5", true);
 
 		setZagadka2Parametres();
 		createImageParameters();
 		createLabelGiveAnswer();
 		createLabelAnswerTrue();
-		createLabelAwswerWrong();
-		createTextFieldToEnterAnswer();
+		createLabelAnswerWrong();
+		createComboBoxToEnterAnswer();
 		createButtonPrompt();
 		createTextAreaWithPrompt();
 		createButtonConfirmingTheAnswer();
@@ -48,16 +46,16 @@ public class Zagadka2 extends JDialog {
 	}
 	   
 	public void createImageParameters() {
-		imageZagadka2 =  new JLabel(new ImageIcon("images/komputer.jpg"));
-		imageZagadka2.setBounds(50, 30, 1000, 500);
-		add(imageZagadka2);
+		imageZagadka5 = new JLabel(new ImageIcon("images/kartka1.jpg"));
+		imageZagadka5.setBounds(50, 30, 1000, 500);
+		add(imageZagadka5);
 	}
 	   
 	public void createLabelGiveAnswer() {
-		odpZagadka2 = new JLabel("Podaj odpowiedź:  ");
-		odpZagadka2.setBounds(50, 550, 180, 30);
-		odpZagadka2.setFont(new Font("SansSerif", Font.BOLD, 20));
-		add(odpZagadka2);
+		odpZagadka5 = new JLabel("Podaj odpowiedź:  ");
+		odpZagadka5.setBounds(50, 550, 180, 30);
+		odpZagadka5.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(odpZagadka5);
 	}
 	   
 	public void createLabelAnswerTrue() {
@@ -68,7 +66,7 @@ public class Zagadka2 extends JDialog {
 		add(odpTrue);
 	}
 	
-	public void createLabelAwswerWrong()
+	public void createLabelAnswerWrong()
 	{
 		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
 		odpWrong.setBounds(400, 600, 350, 30);
@@ -79,27 +77,19 @@ public class Zagadka2 extends JDialog {
 		
 	}
 	   
-	public void createTextFieldToEnterAnswer() {
-		tAnswer = new JTextField();
-		tAnswer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (getOdp().equals(result)) {
-					okData = true;
-					tAnswer.setEditable(false);
-					odpTrue.setVisible(true);
-					bAnswer.setVisible(false);
-					setVisible(false);
-				} else
-					odpWrong.setVisible(true);
-			}
-		});
-
-		tAnswer.setBounds(250, 550, 100, 30);
-		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
-		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
-		add(tAnswer);
+	public void createComboBoxToEnterAnswer()
+	{
+		cbNumber = new JComboBox<>();
+		
+		for (int i = 0; i <= 10; i++) {
+			cbNumber.addItem(i);
+		}
+		cbNumber.setBounds(250, 550, 100, 30);
+		cbNumber.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(cbNumber);
+		
 	}
+	
        
 	public void createButtonPrompt() {
 		bPrompt = new JButton("Podpowiedź");
@@ -114,7 +104,10 @@ public class Zagadka2 extends JDialog {
 	}
 	   
 	public void createTextAreaWithPrompt() {
-		lPrompt = new JTextArea("Przyjrzyj sie umiejscowieniu znaków na klawiaturze komputera");
+		lPrompt = new JTextArea("Jaką cyfrę musisz wpisać, aby dostać 5 z kartkówki?"
+				+ "\nPrzyjrzyj się cyfrom po obu stronach znaku równości i znajdź logikę!"
+				+ "\nPrzjrzyj się ocenie, tam znajdziesz podpowiedź!"
+				+ "\nPodnieś cyfrę po lewej do trzeciej potęgi i dodaj ją do wyniku.");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(530, 550, 500, 22);
@@ -129,7 +122,7 @@ public class Zagadka2 extends JDialog {
 
 				if (getOdp().equals(result)) {
 					okData = true;
-					tAnswer.setEditable(false);
+					cbNumber.setEnabled(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
 					setVisible(false);
@@ -156,11 +149,13 @@ public class Zagadka2 extends JDialog {
 	
 
 	public String getOdp() {
-		return tAnswer.getText();
+		int Number = cbNumber.getSelectedIndex();
+		String IntToString=String.valueOf(Number);
+		return IntToString;
 	}
 
 	public void setFocus() {
-		tAnswer.requestFocusInWindow();
+		cbNumber.requestFocusInWindow();
 	}
 
 	public boolean isOK() {

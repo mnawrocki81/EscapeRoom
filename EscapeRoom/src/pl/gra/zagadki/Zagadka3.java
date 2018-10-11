@@ -2,20 +2,14 @@ package pl.gra.zagadki;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
@@ -26,8 +20,7 @@ public class Zagadka3 extends JDialog {
 	
 	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
-	private JPanel imageZagadka3;
-	private JLabel odpZagadka3, odpTrue, odpWrong;
+	private JLabel imageZagadka3, odpZagadka3, odpTrue, odpWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private JSlider slider;
@@ -57,7 +50,7 @@ public class Zagadka3 extends JDialog {
 	}
 
 	public void createImageParameters() {
-		imageZagadka3 = new ImagePanel3();
+		imageZagadka3 = new JLabel(new ImageIcon("images/liczby.jpg"));
 		imageZagadka3.setBounds(50, 30, 1000, 500);
 		add(imageZagadka3);
 	}
@@ -114,7 +107,6 @@ public class Zagadka3 extends JDialog {
 					tAnswer.setEditable(false);
 					slider.setEnabled(false);
 					odpTrue.setVisible(true);
-					odpWrong.setVisible(false);
 					bAnswer.setVisible(false);
 					setVisible(false);
 				} else
@@ -136,7 +128,7 @@ public class Zagadka3 extends JDialog {
 				lPrompt.setVisible(true);
 			}
 		});
-		bPrompt.setBounds(600, 550, 120, 25);
+		bPrompt.setBounds(600, 550, 120, 22);
 		add(bPrompt);
 	}
        
@@ -161,7 +153,6 @@ public class Zagadka3 extends JDialog {
 					tAnswer.setEditable(false);
 					slider.setEnabled(false);
 					odpTrue.setVisible(true);
-					odpWrong.setVisible(false);
 					bAnswer.setVisible(false);
 					setVisible(false);
 				} else
@@ -201,29 +192,3 @@ public class Zagadka3 extends JDialog {
    
 }
 
-
-class ImagePanel3 extends JPanel {
-
-	private BufferedImage imageZagadka3;
-
-	public ImagePanel3() {
-		super();
-
-		File imageFile3 = new File("images/liczby.jpg");
-		try {
-			imageZagadka3 = ImageIO.read(imageFile3);
-		} catch (IOException e) {
-			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
-		}
-
-	}
-
-	// @Override
-	public void paintComponent(Graphics g) {
-
-		Graphics2D zagadka3 = (Graphics2D) g;
-		zagadka3.drawImage(imageZagadka3, 0, 0, this);
-
-	}
-}

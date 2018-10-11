@@ -3,22 +3,15 @@ package pl.gra.zagadki;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -26,8 +19,7 @@ public class Zagadka4 extends JDialog {
 	
 	private JTextField tAnswer, tHour, tMinutes;
 	private JButton bPrompt, bAnswer, bCancel;
-	private JPanel imageZagadka4;
-	private JLabel odpZagadka4, odpTrue, odpWrong, lHour, lMinutes, lColon;
+	private JLabel imageZagadka4, odpZagadka4, odpTrue, odpWrong, lHour, lMinutes, lColon;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private boolean okData;
@@ -61,7 +53,7 @@ public class Zagadka4 extends JDialog {
 	}
 	
 	public void createImageParameters() {
-		imageZagadka4 = new ImagePanel4();
+		imageZagadka4 = new JLabel(new ImageIcon("images/zegar.jpg"));
 		imageZagadka4.setBounds(50, 30, 1000, 500);
 		add(imageZagadka4);
 	}
@@ -141,7 +133,6 @@ public class Zagadka4 extends JDialog {
 					tHour.setEditable(false);
 					tMinutes.setEditable(false);
 					odpTrue.setVisible(true);
-					odpWrong.setVisible(false);
 					bAnswer.setVisible(false);
 					setVisible(false);
 				} else
@@ -163,7 +154,7 @@ public class Zagadka4 extends JDialog {
 				lPrompt.setVisible(true);
 			}
 		});
-		bPrompt.setBounds(600, 550, 120, 25);
+		bPrompt.setBounds(600, 550, 120, 22);
 		add(bPrompt);
 	}
        
@@ -190,8 +181,9 @@ public class Zagadka4 extends JDialog {
 				if (getOdp().equals(result)) {
 					okData = true;
 					tAnswer.setEditable(false);
+					tHour.setEditable(false);
+					tMinutes.setEditable(false);
 					odpTrue.setVisible(true);
-					odpWrong.setVisible(false);
 					bAnswer.setVisible(false);
 					setVisible(false);
 				} else
@@ -232,28 +224,3 @@ public class Zagadka4 extends JDialog {
 
 }
 
-class ImagePanel4 extends JPanel {
-
-	private BufferedImage imageZagadka4;
-
-	public ImagePanel4() {
-		super();
-
-		File imageFile4 = new File("images/zegar.jpg");
-		try {
-			imageZagadka4 = ImageIO.read(imageFile4);
-		} catch (IOException e) {
-			System.err.println("Blad odczytu obrazka");
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		
-		Graphics2D zagadka4 = (Graphics2D) g;
-		zagadka4.drawImage(imageZagadka4, 0, 0, this);
-		
-	}
-}
