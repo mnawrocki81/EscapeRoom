@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 /**
  * Program do pracy dyplomowej, gra Escape Room
- * @version 30.08.2018
+ * @version 11.10.2018
  * @author mnawrocki
  *
  */
