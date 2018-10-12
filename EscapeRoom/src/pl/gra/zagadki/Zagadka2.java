@@ -24,7 +24,7 @@ public class Zagadka2 extends JDialog {
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private boolean okData ;
-	private static final String result = "1";
+	private static final String result = "3";
 	
 	public Zagadka2(JFrame owner) {
 		super(owner, "Zagadka2", true);
