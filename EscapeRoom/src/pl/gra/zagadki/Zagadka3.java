@@ -28,13 +28,13 @@ public class Zagadka3 extends JDialog {
 	private static final String result = "6";
 	
 	public Zagadka3(JFrame owner) {
-	   super(owner, "Zagadka3", true);
+	   super(owner, "Liczby", true);
 	   
 	   setZagadka3Parametres ();
 	   createImageParameters();
 	   createLabelGiveAnswer();
 	   createLabelAnswerTrue();
-	   createLabelAwswerWrong();
+	   createLabelAnswerWrong();
 	   createSliderToEnterAnswer();
 	   createTextFieldToEnterAnswer();
 	   createButtonPrompt();
@@ -63,7 +63,7 @@ public class Zagadka3 extends JDialog {
 		add(odpTrue);
 	}
 	
-	public void createLabelAwswerWrong()
+	public void createLabelAnswerWrong()
 	{
 		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
 		odpWrong.setBounds(470, 600, 350, 30);
@@ -108,15 +108,20 @@ public class Zagadka3 extends JDialog {
 					slider.setEnabled(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				}else {
 					odpWrong.setVisible(true);
+					slider.setValue(0);
+					tAnswer.setText("");
+				}
+				   
 			}
 		});
 
 		tAnswer.setBounds(470, 550, 100, 30);
 		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
-		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+		tAnswer.setHorizontalAlignment(JTextField.CENTER);
 		add(tAnswer);
 	}
 
@@ -154,9 +159,13 @@ public class Zagadka3 extends JDialog {
 					slider.setEnabled(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					slider.setValue(0);
+					tAnswer.setText("");
+				}
 			}
 		});
 		bAnswer.setBounds(50, 600, 120, 25);
@@ -180,12 +189,12 @@ public class Zagadka3 extends JDialog {
 	public String getOdp() {
 		return tAnswer.getText();
 	}
-
+	
 	public void setFocus() {
 		tAnswer.requestFocusInWindow();
-
 	}
 
+	
 	public boolean isOK() {
 		return okData;
 	}

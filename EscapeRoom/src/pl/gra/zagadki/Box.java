@@ -1,6 +1,8 @@
 package pl.gra.zagadki;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,13 +11,20 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class Box extends JDialog {
 	
 	private JLabel imageBox1, imageBox2;
-	private JButton bOpen, bTake, bCancel;
+	private JButton bPrompt,bOpen, bTake, bCancel;
 	private Envelope envelope;
+	private JTextField openingCode;
+	private JTextArea lPrompt;
+	private JScrollPane sPrompt;
+	private static final String result = "238";
 
 	public Box(JFrame owner) {
 		   super(owner, "Box", true);
@@ -23,9 +32,12 @@ public class Box extends JDialog {
 		   setLetterParametres ();
 		   createImage1Parameters();
 		   createImage2Parameters();
+		   createTextFieldCodeToOpenBox();
 		   createButtonOpenBox();
 		   createButtonTakeEnvelope();
 		   createButtonToCancel();
+		   createButtonPrompt();
+		   createTextAreaWithPrompt();
 }
 	
 	public void setLetterParametres ()
@@ -53,18 +65,32 @@ public class Box extends JDialog {
 		
 	}
 	
+	public void createTextFieldCodeToOpenBox()
+	{
+		openingCode = new JTextField();
+		
+		openingCode.setBounds(520, 375, 50, 30);
+		openingCode.setFont(new Font("SansSerif", Font.BOLD, 20));
+		openingCode.setLayout(new FlowLayout(FlowLayout.CENTER));
+		add(openingCode);
+	}
+	
 	public void createButtonOpenBox() {
 		bOpen = new JButton("Otwórz skrzynkę");
 		bOpen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (openingCode.getText().equals(result)) {
 
-				imageBox1.setVisible(false);
-				imageBox2.setVisible(true);
-				bOpen.setVisible(false);
-				bTake.setVisible(true);
+					imageBox1.setVisible(false);
+					imageBox2.setVisible(true);
+					bOpen.setVisible(false);
+					openingCode.setVisible(false);
+					bTake.setVisible(true);
+				}
 			}
 		});
-		bOpen.setBounds(470, 400, 150, 30);
+		bOpen.setBounds(470, 410, 150, 30);
 		bOpen.setBackground(new Color(165, 42, 42));
 		bOpen.setForeground(Color.white);
 		add(bOpen);
@@ -100,5 +126,30 @@ public class Box extends JDialog {
 		});
 		bCancel.setBounds(200, 600, 120, 25);
 		add(bCancel);
+	}
+	
+	public void createButtonPrompt() {
+		bPrompt = new JButton("Podpowiedź");
+		bPrompt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lPrompt.setVisible(true);
+			}
+		});
+		bPrompt.setBounds(550, 600, 120, 22);
+		add(bPrompt);
+	}
+       
+	public void createTextAreaWithPrompt() {
+
+		lPrompt = new JTextArea("Otwórz skrzynkę wpisując kod \nwskazówka znajduje się na skrzynce,"
+				+ "\nsą to cyfry, które będą pasować do podanego układu równań."
+				+ "\nDo odpowiedzi potrzebujesz wyniku kilku zagadek,"
+				+ "\njeśli żadne cyfry po podsatawieniu nie pasują, "
+				+ "\nrozwiąż pozostałe zagadki i wróć w to miejsce. ");
+		lPrompt.setVisible(false);
+		sPrompt = new JScrollPane(lPrompt);
+		sPrompt.setBounds(680, 600, 370, 22);
+		add(sPrompt);
 	}
 }

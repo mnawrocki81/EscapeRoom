@@ -25,7 +25,7 @@ public class Zagadka5 extends JDialog {
 	private static final String result = "2";
 	
 	public Zagadka5(JFrame owner) {
-		super(owner, "Zagadka5", true);
+		super(owner, "Kartka", true);
 
 		setZagadka2Parametres();
 		createImageParameters();
@@ -125,9 +125,12 @@ public class Zagadka5 extends JDialog {
 					cbNumber.setEnabled(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					cbNumber.setSelectedItem(0);
+				}
 			}
 		});
 		bAnswer.setBounds(50, 600, 120, 25);
@@ -152,10 +155,6 @@ public class Zagadka5 extends JDialog {
 		int Number = cbNumber.getSelectedIndex();
 		String IntToString=String.valueOf(Number);
 		return IntToString;
-	}
-
-	public void setFocus() {
-		cbNumber.requestFocusInWindow();
 	}
 
 	public boolean isOK() {

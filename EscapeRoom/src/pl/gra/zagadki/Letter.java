@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
 public class Letter extends JDialog  {
 	
 	private JLabel imageLetter;

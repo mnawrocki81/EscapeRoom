@@ -14,26 +14,26 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 //zaprogramowanie okna z zagadką, dziedziczącego po klasie JDialog
-public class Zagadka extends JDialog {
+public class Zagadka extends JDialog{
 	
 	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
 	private JLabel imageZagadka1,odpZagadka1, odpTrue, odpWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
-	private boolean okData = false;
+	private boolean okData;
 	private static final String  result = "5";
 	
 	
 	
 	public Zagadka(JFrame owner) {
-	   super(owner, "Zagadka1", true);
+	   super(owner, "Ślimak", true);
 	   
 	   setZagadka1Parametres ();
 	   createImageParameters();
 	   createLabelGiveAnswer();
 	   createLabelAnswerTrue();
-	   createLabelAwswerWrong();
+	   createLabelAnswerWrong();
 	   createTextFieldToEnterAnswer();
 	   createButtonPrompt();
 	   createTextAreaWithPrompt();
@@ -76,7 +76,7 @@ public class Zagadka extends JDialog {
 	}
 	
 	
-	public void createLabelAwswerWrong()
+	public void createLabelAnswerWrong()
 	{
 		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
 		odpWrong.setBounds(400, 600, 350, 30);
@@ -97,18 +97,20 @@ public class Zagadka extends JDialog {
 					okData = true;
 					tAnswer.setEditable(false);
 					odpTrue.setVisible(true);
-					odpWrong.setVisible(false);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					tAnswer.setText("");
+				}
 			}
 		});
 
-		   tAnswer.setBounds(250, 550, 100, 30);
-		   tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
-		   tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
-	       add(tAnswer);
+		tAnswer.setBounds(250, 550, 100, 30);
+		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
+		tAnswer.setHorizontalAlignment(JTextField.CENTER);
+		add(tAnswer);
 	}
 	
 	public void createButtonPrompt()
@@ -127,13 +129,11 @@ public class Zagadka extends JDialog {
 	public void createTextAreaWithPrompt()
 	{
 		lPrompt = new JTextArea("Skorupa ślimaka, to przykład boskiej proporcji w przyrodzie (lub złotego podziału), "
-				+ "\nzwróć uwagę na ciąg liczbowy i skojarz go z popularnym ciągiem określonym przez "
-				+ "\nwłoskiego matematyka z Pizy w 1202 r.,"
+				+ "\nzwróć uwagę na ciąg liczbowy i skojarz go z popularnym ciągiem określonym w 1202 r."
+				+ "\nprzez włoskiego matematyka z Pizy,"
 				+ "\nktóry nazywał się Fibonacci, a w jego ciągu pierwsza + druga cyfra daje trzecią"
-				+ "\ndruga + trzecia daje czwartą i tak dalej."); // podpowiedzi wyświetlają się po jednej linijce,
-																	// stopniowo coraz bardziej szczegółowo, mozna
-																	// przewijać scrollem
-		lPrompt.setVisible(false); // podpowiedź widocznna po kliknięciu przycisku na życzenie gracza
+				+ "\ndruga + trzecia daje czwartą i tak dalej."); 
+		lPrompt.setVisible(false); 
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(530, 550, 500, 22);
 		add(sPrompt);
@@ -143,7 +143,6 @@ public class Zagadka extends JDialog {
 	{
 		//przycisk Potwierdź może być użyty tylko raz, pózniej zostaje ukryty i pojawia się komunikat o poprawnej odpowiedzi
 		bAnswer = new JButton("Potwierdź");
-		bAnswer.setVisible(true);
 		bAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -152,9 +151,13 @@ public class Zagadka extends JDialog {
 					tAnswer.setEditable(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					tAnswer.setText("");
+					tAnswer.requestFocusInWindow();
+				}
 			}
 		});
 		bAnswer.setBounds(50, 600, 120, 25);
@@ -171,7 +174,7 @@ public class Zagadka extends JDialog {
 				okData = false;
 				setVisible(false);
 			}
-		});
+		});;
 		bCancel.setBounds(200, 600, 120, 25);
 		add(bCancel);
 	}
@@ -180,16 +183,12 @@ public class Zagadka extends JDialog {
 	public String getOdp() {
 		return tAnswer.getText();
 	}
-    
-	public void setFocus() {
-		tAnswer.requestFocusInWindow();
-
-	}
-    
+        
 	public boolean isOK() {
 		return okData;
 	}
-       
+
+	       
     
 }
 

@@ -26,7 +26,7 @@ public class Zagadka4 extends JDialog {
 	private static final String result = "8";
 	
 	public Zagadka4(JFrame owner) {
-		   super(owner, "Zagadka4", true);
+		   super(owner, "Zegar", true);
 		   
 		   setZagadka4Parametres ();
 		   createImageParameters();
@@ -37,7 +37,7 @@ public class Zagadka4 extends JDialog {
 		   createTextFieldGiveMinutes();
 		   createLabelGiveAnswer();
 		   createLabelAnswerTrue();
-		   createLabelAwswerWrong();
+		   createLabelAnswerWrong();
 		   createTextFieldToEnterAnswer();
 		   createButtonPrompt();
 		   createTextAreaWithPrompt();
@@ -86,6 +86,7 @@ public class Zagadka4 extends JDialog {
 		tHour = new JTextField();
 		tHour.setBounds(100, 560, 50, 30);
 		tHour.setFont(new Font("SansSerif", Font.BOLD, 15));
+		tHour.setHorizontalAlignment(JTextField.CENTER);
 		add(tHour);
 	}
 	
@@ -94,6 +95,7 @@ public class Zagadka4 extends JDialog {
 		tMinutes = new JTextField();
 		tMinutes.setBounds(224, 540, 50, 30);
 		tMinutes.setFont(new Font("SansSerif", Font.BOLD, 15));
+		tMinutes.setHorizontalAlignment(JTextField.CENTER);
 		add(tMinutes);		
 	}
 	
@@ -112,7 +114,7 @@ public class Zagadka4 extends JDialog {
 		add(odpTrue);
 	}
 	
-	public void createLabelAwswerWrong()
+	public void createLabelAnswerWrong()
 	{
 		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
 		odpWrong.setBounds(470, 600, 350, 30);
@@ -134,15 +136,19 @@ public class Zagadka4 extends JDialog {
 					tMinutes.setEditable(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					tAnswer.setText("");
+					tAnswer.requestFocusInWindow();
+				}
 			}
 		});
 
 		tAnswer.setBounds(470, 550, 100, 30);
 		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
-		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+		tAnswer.setHorizontalAlignment(JTextField.CENTER);
 		add(tAnswer);
 	}
 	
@@ -162,7 +168,7 @@ public class Zagadka4 extends JDialog {
 
 		lPrompt = new JTextArea("Przyjrzyj się dobrze na co wskazuje wskazówka, "
 				+ "\nczy wskazuje poprawną liczbą?"
-				+ "\nwpisz we właściwe miejsca godzine i minuty "
+				+ "\nWpisz we właściwe miejsca godzine i minuty, "
 				+ "\njakie równanie Ci to przypomina? "				
 				+ "\nPodziel godz./min., a otrzymasz wynik zagadki. ");
 		lPrompt.setVisible(false);
@@ -185,9 +191,13 @@ public class Zagadka4 extends JDialog {
 					tMinutes.setEditable(false);
 					odpTrue.setVisible(true);
 					bAnswer.setVisible(false);
+					odpWrong.setVisible(false);
 					setVisible(false);
-				} else
+				} else {
 					odpWrong.setVisible(true);
+					tAnswer.setText("");
+					tAnswer.requestFocusInWindow();
+				}
 			}
 		});
 		bAnswer.setBounds(50, 600, 120, 25);
@@ -212,12 +222,7 @@ public class Zagadka4 extends JDialog {
 		return tAnswer.getText();
 	}
 
-	public void setFocus() {
-		tAnswer.requestFocusInWindow();
-
-	}
-
-	public boolean isOK() {
+		public boolean isOK() {
 		return okData;
 	}
    

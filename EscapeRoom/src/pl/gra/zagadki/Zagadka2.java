@@ -16,24 +16,24 @@ import javax.swing.JTextField;
 
 //zasada działania analogiczna jak w klasie Zagadka
 
-public class Zagadka2 extends JDialog {
+public class Zagadka2 extends JDialog implements ActionListener {
 	
 	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
 	private JLabel imageZagadka2,odpZagadka2, odpTrue, odpWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
-	private boolean okData ;
+	private boolean okData;
 	private static final String result = "3";
 	
 	public Zagadka2(JFrame owner) {
-		super(owner, "Zagadka2", true);
+		super(owner, "Komputer", true);
 
 		setZagadka2Parametres();
 		createImageParameters();
 		createLabelGiveAnswer();
 		createLabelAnswerTrue();
-		createLabelAwswerWrong();
+		createLabelAnswerWrong();
 		createTextFieldToEnterAnswer();
 		createButtonPrompt();
 		createTextAreaWithPrompt();
@@ -68,7 +68,7 @@ public class Zagadka2 extends JDialog {
 		add(odpTrue);
 	}
 	
-	public void createLabelAwswerWrong()
+	public void createLabelAnswerWrong()
 	{
 		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
 		odpWrong.setBounds(400, 600, 350, 30);
@@ -81,23 +81,10 @@ public class Zagadka2 extends JDialog {
 	   
 	public void createTextFieldToEnterAnswer() {
 		tAnswer = new JTextField();
-		tAnswer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (getOdp().equals(result)) {
-					okData = true;
-					tAnswer.setEditable(false);
-					odpTrue.setVisible(true);
-					bAnswer.setVisible(false);
-					setVisible(false);
-				} else
-					odpWrong.setVisible(true);
-			}
-		});
-
+		tAnswer.addActionListener(this);
 		tAnswer.setBounds(250, 550, 100, 30);
 		tAnswer.setFont(new Font("SansSerif", Font.BOLD, 20));
-		tAnswer.setLayout(new FlowLayout(FlowLayout.CENTER));
+		tAnswer.setHorizontalAlignment(JTextField.CENTER);
 		add(tAnswer);
 	}
        
@@ -123,33 +110,14 @@ public class Zagadka2 extends JDialog {
 	   
 	public void createButtonConfirmingTheAnswer() {
 		bAnswer = new JButton("Potwierdź");
-		bAnswer.setVisible(true);
-		bAnswer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (getOdp().equals(result)) {
-					okData = true;
-					tAnswer.setEditable(false);
-					odpTrue.setVisible(true);
-					bAnswer.setVisible(false);
-					setVisible(false);
-				} else
-					odpWrong.setVisible(true);
-			}
-		});
+		bAnswer.addActionListener(this);
 		bAnswer.setBounds(50, 600, 120, 25);
 		add(bAnswer);
 	}
 	   
 	public void createButtonToCancel() {
 		bCancel = new JButton("Wróć");
-		bCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				okData = false;
-				setVisible(false);
-			}
-		});
+		bCancel.addActionListener(this);
 		bCancel.setBounds(200, 600, 120, 25);
 		add(bCancel);
 	}
@@ -159,13 +127,36 @@ public class Zagadka2 extends JDialog {
 		return tAnswer.getText();
 	}
 
-	public void setFocus() {
-		tAnswer.requestFocusInWindow();
-	}
-
+	
 	public boolean isOK() {
 		return okData;
 	} 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object z = e.getSource();
+		if (z == bAnswer || z == tAnswer) {
+			if (getOdp().equals(result)) {
+				okData = true;
+				tAnswer.setEditable(false);
+				odpTrue.setVisible(true);
+				bAnswer.setVisible(false);
+				odpWrong.setVisible(false);
+				setVisible(false);
+			} else {
+				odpWrong.setVisible(true);
+				tAnswer.setText("");
+				tAnswer.requestFocusInWindow();
+			}
+			    
+		}
+
+		else if (z == bCancel) {
+			okData = false;
+			setVisible(false);
+		}
+
+	
+	}
 }
 
