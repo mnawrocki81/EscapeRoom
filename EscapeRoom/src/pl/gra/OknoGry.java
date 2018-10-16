@@ -1,5 +1,4 @@
 package pl.gra;
-import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,15 +21,15 @@ import java.awt.event.ActionEvent;
 
 public class OknoGry extends EscapeRoom {
 
-	private JButton bstart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, 
+	private JButton bStart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, 
 	bPrompt, bZagadka5, bLetter, bBox, bExitCode;
-	private JLabel blackroom, imageroom, ltitle, lcounter, lcounter1,komunikat,odpowiedzi;
-	private JTextArea ltekst, lPrompt;
-	private JTextField code;
+	private JLabel house, blackroom, imageroom, lTitle, lCounter, lCounter1,lKomunikat, lOdpowiedzi;
+	private JTextArea lTekst, lPrompt;
+	private JTextField tCode;
 	private JScrollPane sPrompt;
 	private Timer tm;
-	private static final String exitCode = "TEST";
-	private int i = 299;
+	private static final String exitCode = "HASŁO";
+	private int i = 1199;
 	private int minuty, sekundy;
 	private String text = "";
 	private Zagadka fib;
@@ -45,10 +44,11 @@ public class OknoGry extends EscapeRoom {
 	public OknoGry() {
 		
 		setWindowParameters();
-		createButtonStart();
+		createHouseImage();
 		createLabelTitle();
 		createTextAboutAuthor();
-		createBlackRoom();
+		createButtonStart();
+		createImageBlackRoom();
 		createImageRoom();
 		createButtonSwitch();
 		createFirstRiddle ();
@@ -77,54 +77,64 @@ public class OknoGry extends EscapeRoom {
 		setLayout(null);
 	}
 	
-	public void createButtonStart()
+	public void createHouseImage()
 	{
-		bstart = new JButton("Rozpocznij grę");
-		bstart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				ltitle.setVisible(false);
-				bstart.setVisible(false);
-				ltekst.setVisible(false);
-				blackroom.setVisible(true);
-				bSwitch.setVisible(true);
-				lcounter.setVisible(true);
-				lcounter1.setVisible(true);
-				komunikat.setVisible(true);
-				odpowiedzi.setVisible(true);
-				bPrompt.setVisible(true);
-				sPrompt.setVisible(true);
-				code.setVisible(true);
-				tm.start();
-			}
-		});
-		bstart.setFont(new Font("SansSerif", Font.BOLD, 20));
-		bstart.setBounds(500, 300, 200, 50);
-		add (bstart); 
+		house = new JLabel(new ImageIcon("images/house1.jpg"));
+		house.setBounds(242, 100, 716, 494);
+		add(house);
 	}
 	
 	public void createLabelTitle()
 	{
-		ltitle = new JLabel("POKÓJ LICZB", JLabel.CENTER);
-		ltitle.setLayout(new FlowLayout(FlowLayout.CENTER));
-		ltitle.setBounds(400, 70, 400, 200);
-		ltitle.setForeground(Color.RED);
-		ltitle.setFont(new Font("SansSerif", Font.ITALIC, 40));
-		add(ltitle);
+		lTitle = new JLabel("POKÓJ LICZB", JLabel.CENTER);
+		lTitle.setBounds(400, 20, 400, 50);
+		lTitle.setForeground(Color.RED);
+		lTitle.setFont(new Font("SansSerif", Font.ITALIC, 40));
+		add(lTitle);
 	}
 	
 	public void createTextAboutAuthor()
 	{
-		ltekst = new JTextArea("Marcin Nawrocki - Praca Dyplomowa \nWWSIS Horyzont Studia Podyplomowe \n"
+		lTekst = new JTextArea("Marcin Nawrocki - Praca Dyplomowa \nWWSIS Horyzont Studia Podyplomowe \n"
 				+ "Inżynieria Oprogramowania - Programowanie \npod kierunkiem mgr.inż. Krzysztofa Węzowskiego");
-		ltekst.setBounds(700, 500, 350, 100);
-		ltekst.setFont(new Font("SansSerif", Font.BOLD, 15));
-		ltekst.setLineWrap(true);
-		add(ltekst);
+		lTekst.setBounds(600, 630, 350, 100);
+		lTekst.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lTekst.setLineWrap(true);
+		add(lTekst);
 		
 	}
 	
-	public void createBlackRoom()
+	public void createButtonStart()
+	{
+		bStart = new JButton("Rozpocznij grę");
+		bStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lTitle.setVisible(false);
+				bStart.setVisible(false);
+				lTekst.setVisible(false);
+				house.setVisible(false);
+				blackroom.setVisible(true);
+				bSwitch.setVisible(true);
+				lCounter.setVisible(true);
+				lCounter1.setVisible(true);
+				lKomunikat.setVisible(true);
+				lOdpowiedzi.setVisible(true);
+				bPrompt.setVisible(true);
+				sPrompt.setVisible(true);
+				tCode.setVisible(true);
+				tm.start();
+			}
+		});
+		bStart.setFont(new Font("SansSerif", Font.BOLD, 20));
+		bStart.setBackground(Color.darkGray);
+		bStart.setForeground(Color.white);
+		bStart.setBounds(500, 450, 200, 50);
+		add (bStart); 
+	}
+	
+	
+	public void createImageBlackRoom()
 	{
 		blackroom = new JLabel(new ImageIcon("images/blackroom.jpg"));
 		blackroom.setBounds(50, 50, 1100, 500);
@@ -177,13 +187,13 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				fib.setVisible(true);
-				fib.setFocus(); //funkcja ustawiająca kursor w JTextField do wpisania odpowiedzi
+				//fib.setFocus(); //funkcja ustawiająca kursor w JTextField do wpisania odpowiedzi
 				
 				if (fib.isOK()) {
-					odpowiedzi.setText(text + fib.getOdp()); // dodanie poprawnej odpowiedzi do notatnika JLabel
+					lOdpowiedzi.setText(text + fib.getOdp()); // dodanie poprawnej odpowiedzi do notatnika JLabel
 				}
 			
-				text = 	odpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text
+				text = 	lOdpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text
 				
 				if (text.length()==20)
 					bExitCode.setVisible(true);
@@ -205,12 +215,11 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				znaki.setVisible(true);
-				znaki.setFocus();
 				
 				if (znaki.isOK()) {
-					odpowiedzi.setText(text + znaki.getOdp());
+					lOdpowiedzi.setText(text + znaki.getOdp());
 				}
-				text = odpowiedzi.getText() + "   ";	
+				text = lOdpowiedzi.getText() + "   ";	
 				
 				if (text.length()==20)
 					bExitCode.setVisible(true);
@@ -233,13 +242,12 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				liczby.setVisible(true);
-				liczby.setFocus();
 				
 				if (liczby.isOK()) {
-					odpowiedzi.setText(text + liczby.getOdp());
+					lOdpowiedzi.setText(text + liczby.getOdp());
 				}
 			
-				text = 	odpowiedzi.getText() + "   "; 	
+				text = 	lOdpowiedzi.getText() + "   "; 	
 				
 				if (text.length()==20)
 					bExitCode.setVisible(true);
@@ -261,13 +269,12 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				clock.setVisible(true);
-				clock.setFocus();
 				
 				if (clock.isOK()) {
-					odpowiedzi.setText(text + clock.getOdp());
+					lOdpowiedzi.setText(text + clock.getOdp());
 				}
 			
-				text = 	odpowiedzi.getText() + "   "; 	
+				text = 	lOdpowiedzi.getText() + "   "; 	
 				
 				if (text.length() == 20)
 					bExitCode.setVisible(true);
@@ -290,13 +297,12 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				card.setVisible(true);
-				card.setFocus();
-				
+								
 				if (card.isOK()) {
-					odpowiedzi.setText(text + card.getOdp());
+					lOdpowiedzi.setText(text + card.getOdp());
 				}
 			
-				text = 	odpowiedzi.getText() + "   "; 
+				text = 	lOdpowiedzi.getText() + "   "; 
 				
 				if (text.length()==20)
 					bExitCode.setVisible(true);
@@ -352,39 +358,39 @@ public class OknoGry extends EscapeRoom {
 	
 	public void createLabelBeforeTheTimer()
 	{
-		lcounter = new JLabel("Pozostały czas:  ");
-		lcounter.setBounds(800, 600, 200, 50);
-		lcounter.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lcounter.setVisible(false);
-		add(lcounter);
+		lCounter = new JLabel("Pozostały czas:  ");
+		lCounter.setBounds(800, 600, 200, 50);
+		lCounter.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lCounter.setVisible(false);
+		add(lCounter);
 	}
 	
 	public void createLabelCountdownOfTime()
 	{
-		lcounter1 = new JLabel("5:00");
-		lcounter1.setBounds(960, 600, 200, 50);
-		lcounter1.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lcounter1.setVisible(false);
-		add(lcounter1);
+		lCounter1 = new JLabel("20:00");
+		lCounter1.setBounds(960, 600, 200, 50);
+		lCounter1.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lCounter1.setVisible(false);
+		add(lCounter1);
 	}
 	
 	public void createLabelMessageToTheCounter()
 	{		
-		komunikat = new JLabel("  ");
-		komunikat.setBounds(800, 650, 300, 50);
-		komunikat.setForeground(Color.RED);
-		komunikat.setFont(new Font("SansSerif", Font.BOLD, 17));
-		komunikat.setVisible(false);
-		add(komunikat);
+		lKomunikat = new JLabel("  ");
+		lKomunikat.setBounds(800, 650, 300, 50);
+		lKomunikat.setForeground(Color.RED);
+		lKomunikat.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lKomunikat.setVisible(false);
+		add(lKomunikat);
 	}
 	
 	public void createLabelToCopyResultsOfRiddles()
 	{
-		odpowiedzi = new JLabel(text);
-		odpowiedzi.setBounds(50, 600, 300,50);
-		odpowiedzi.setFont(new Font("SansSerif", Font.BOLD, 20));
-		odpowiedzi.setVisible(false);
-		add(odpowiedzi);
+		lOdpowiedzi = new JLabel(text);
+		lOdpowiedzi.setBounds(50, 600, 300,50);
+		lOdpowiedzi.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lOdpowiedzi.setVisible(false);
+		add(lOdpowiedzi);
 	}
 	
 	public void createButtonToWriteExitCode()
@@ -397,14 +403,14 @@ public class OknoGry extends EscapeRoom {
 					panelexitCode = new ExitCode(null);
 				}
 				
+				panelexitCode.setOdp();
 				panelexitCode.setVisible(true);
-				
+								
 				if (panelexitCode.isOK()) {
-					code.setEditable(true);
-					code.setText(panelexitCode.getOdp());
-					code.requestFocusInWindow();
+					tCode.setEditable(true);
+					tCode.setText(panelexitCode.getOdp());
+					tCode.requestFocusInWindow();
 				}
-			
 													
 			}
 		});
@@ -426,32 +432,33 @@ public class OknoGry extends EscapeRoom {
 				if (i < 60) {
 					if (i < 0) {
 						tm.stop(); 
-						komunikat.setText("Czas minął nie udało ci się wyjść!");
-						code.setEditable(false); // po upłynięciu czasu, nie można już wpisać odpowiedzi
+						lKomunikat.setText("Czas minął nie udało ci się wyjść!");
+						bExitCode.setVisible(false);
+						tCode.setEditable(false); // po upłynięciu czasu, nie można już wpisać odpowiedzi
 					}
 
 					else if (sekundy < 10) // zaprogramowanie aby sekundy od 0 do 9 , pokazywały się z dodatkowym zerem
 											// z przodu tj. 01, 02 itp.
 					{
-						lcounter1.setForeground(Color.RED);
+						lCounter1.setForeground(Color.RED);
 						Toolkit.getDefaultToolkit().beep();
-						lcounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
+						lCounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
 					}
 					
 					else {
-						lcounter1.setForeground(Color.RED); // ostatnia minuta wyświetla się z kolorze czerwonym
+						lCounter1.setForeground(Color.RED); // ostatnia minuta wyświetla się z kolorze czerwonym
 						Toolkit.getDefaultToolkit().beep(); // dla zwiększenia napiecia każda sekunda w ostatniej
 															// minucie z dzwiękiem
-						lcounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
+						lCounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
 					}
 
 				}
 
 				else if (sekundy < 10) {
-					lcounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
+					lCounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
 				} 
 				else {
-					lcounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
+					lCounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
 				}
 				i--;
 
@@ -462,27 +469,29 @@ public class OknoGry extends EscapeRoom {
 	
 	public void createTextFieltToEnterExitCode()
 	{
-		code = new JTextField();
-		code.addActionListener(new ActionListener() {
+		tCode = new JTextField();
+		tCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (code.getText().equals(exitCode)) {
+				if (tCode.getText().equals(exitCode)) {
 					tm.stop();
-					komunikat.setText("Kod poprawny, udało Ci się wyjść!");
-					code.setEditable(false);
+					lKomunikat.setText("Kod poprawny, udało Ci się wyjść!");
+					bExitCode.setVisible(false);
+					tCode.setEditable(false);
 				}
 
 				else {
-					komunikat.setText("Kod błędny, próbuj dalej!");
+					lKomunikat.setText("Kod błędny, próbuj dalej!");
 				}
 
 			}
 		});
-		code.setBounds(265, 650, 150, 40);
-		code.setFont(new Font("SansSerif", Font.BOLD, 20));
-		code.setVisible(false);
-		code.setEditable(false);
-		add(code);
+		tCode.setBounds(265, 650, 150, 40);
+		tCode.setFont(new Font("SansSerif", Font.BOLD, 20));
+		tCode.setHorizontalAlignment(JTextField.CENTER);
+		tCode.setVisible(false);
+		tCode.setEditable(false);
+		add(tCode);
 	}
 	
 	public void createButtonPrompt() {

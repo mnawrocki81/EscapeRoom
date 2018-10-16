@@ -1,7 +1,6 @@
 package pl.gra;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +23,6 @@ public class ExitCode extends JDialog {
 	private JScrollPane sPrompt;
 	private JTextArea lPrompt;
 	private boolean okData ;
-	private JLabel  odpTrue, odpWrong;
-	private static final String result = "TEST";
 	
 	
 	public ExitCode(JFrame owner) {
@@ -38,8 +35,6 @@ public class ExitCode extends JDialog {
 		createTextAreaWithPrompt();
 		createButtonConfirmingTheAnswer();
 		createButtonToCancel();
-		createLabelAnswerWrong();
-		createLabelAnswerTrue();
 
 }
 
@@ -47,14 +42,14 @@ public class ExitCode extends JDialog {
 	{
 		setBounds(350, 50, 700, 900);
 		setLayout(null);
-		//setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
 	
 	
 	public void createImageParameters()
 	{
 		imageExitCode = new JLabel(new ImageIcon("images/klawiatura3.jpg"));
-		imageExitCode.setBounds(44,20, 612, 750);
+		imageExitCode.setBounds(44,140, 612, 630);
 		add(imageExitCode);
 		
 	}
@@ -65,19 +60,16 @@ public class ExitCode extends JDialog {
 		tExitCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(result)) {
-					okData = true;
-					odpTrue.setVisible(true);
-					bAnswer.setVisible(false);
-					setVisible(false);
-				} else
-					odpWrong.setVisible(true);
+				okData = true;
+				setVisible(false);	
 			}
 		});
 
-		tExitCode.setBounds(100, 40, 500, 100);
+		tExitCode.setBounds(44, 20, 612, 120);
 		tExitCode.setFont(new Font("SansSerif", Font.BOLD, 40));
-		tExitCode.setLayout(new FlowLayout(FlowLayout.CENTER));
+		tExitCode.setForeground(new Color(255, 255, 153));
+		tExitCode.setBackground(new Color(102, 51, 0));
+		tExitCode.setHorizontalAlignment(JTextField.CENTER);
 		add(tExitCode);
 	}
 	
@@ -99,8 +91,8 @@ public class ExitCode extends JDialog {
 	public void createTextAreaWithPrompt()
 	{
 		lPrompt = new JTextArea("Przyjrzyj sie znakom na przyciskach"
-				+ "\nUłuż słowo z cyfr, które są odpowiedziami do zagadek."
-				+ "\nWskazówke znajdziesz w kopercie ze skrzynki!");
+				+ "\nUłóż słowo z cyfr, które są odpowiedziami do zagadek."
+				+ "\nWskazówkę znajdziesz w kopercie ze skrzynki!");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(165, 780, 491, 22);
@@ -114,13 +106,8 @@ public class ExitCode extends JDialog {
 		bAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (getOdp().equals(result)) {
 					okData = true;
-					odpTrue.setVisible(true);
-					bAnswer.setVisible(false);
-					setVisible(false);
-				} else
-					odpWrong.setVisible(true);
+					setVisible(false);	
 			}
 		});
 		bAnswer.setBounds(44, 810, 120, 25);
@@ -140,31 +127,12 @@ public class ExitCode extends JDialog {
 		add(bCancel);
 	}
 	
-	public void createLabelAnswerWrong()
-	{
-		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
-		odpWrong.setBounds(350, 810, 350, 30);
-		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
-		odpWrong.setForeground(Color.RED);
-		odpWrong.setVisible(false);
-		add(odpWrong);
-		
-	}
-	
-	public void createLabelAnswerTrue() {
-		odpTrue = new JLabel("Odpowiedź poprawna!");
-		odpTrue.setBounds(44, 810, 180, 30);
-		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
-		odpTrue.setVisible(false);
-		add(odpTrue);
-	}
-	
 	public String getOdp() {
 		return tExitCode.getText().toUpperCase();
 	}
 
-	public void setFocus() {
-		tExitCode.requestFocusInWindow();
+	public void setOdp() {
+		tExitCode.setText("");
 	}
 
 	public boolean isOK() {
