@@ -48,7 +48,7 @@ public class ExitCode extends JDialog {
 	
 	public void createImageParameters()
 	{
-		imageExitCode = new JLabel(new ImageIcon("images/klawiatura3.jpg"));
+		imageExitCode = new JLabel(new ImageIcon("images/klawiatura.jpg"));
 		imageExitCode.setBounds(44,140, 612, 630);
 		add(imageExitCode);
 		
@@ -70,6 +70,7 @@ public class ExitCode extends JDialog {
 		tExitCode.setForeground(new Color(255, 255, 153));
 		tExitCode.setBackground(new Color(102, 51, 0));
 		tExitCode.setHorizontalAlignment(JTextField.CENTER);
+		tExitCode.requestFocusInWindow();
 		add(tExitCode);
 	}
 	

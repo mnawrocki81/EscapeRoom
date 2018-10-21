@@ -28,7 +28,7 @@ public class OknoGry extends EscapeRoom {
 	private JTextField tCode;
 	private JScrollPane sPrompt;
 	private Timer tm;
-	private static final String exitCode = "HASŁO";
+	private static final String exitCode = "FAVOL";
 	private int i = 1199;
 	private int minuty, sekundy;
 	private String text = "";
@@ -165,6 +165,7 @@ public class OknoGry extends EscapeRoom {
 				bZagadka5.setVisible(true);
 				bLetter.setVisible(true);
 				bBox.setVisible(true);
+
 			}
 		});
 		bSwitch.setToolTipText("Włącz światło"); 
@@ -269,7 +270,7 @@ public class OknoGry extends EscapeRoom {
 				}
 				
 				clock.setVisible(true);
-				
+								
 				if (clock.isOK()) {
 					lOdpowiedzi.setText(text + clock.getOdp());
 				}
@@ -516,9 +517,11 @@ public class OknoGry extends EscapeRoom {
 				+ "\nZnajdź i przeczytaj list!"
 				+ "\nZnajdź w pokoju zagadki i rozwiąż je, jest ich 5!"
 				+ "\nPo rozwiązaniu zagadek będziesz mógł wpisać kod wyjścia!"
-				+ "\nZnajdź i otwórz skrzynke,"
+				+ "\nZnajdź i otwórz skrzynkę,"
 				+ "\ndo kodu do skrzynki potrzebujesz wyniku trzech konkretnych zagadek"
-				+ "\nw skrzynce znajdziesz wskazówke do ostateczneg hasła! ");
+				+ "\nw skrzynce znajdziesz wskazówkę do ostatecznego hasła! "
+				+ "\nOdkryj prawdziwe nazwisko Twojego oprawcy!"
+				+ "\nWyniki zagadek i nazwisko mają ze sobą coś wspólnego");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(180, 720, 400, 22);
