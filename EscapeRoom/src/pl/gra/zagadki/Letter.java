@@ -35,7 +35,7 @@ public class Letter extends JDialog  {
 	public void  createImageParameters()
 	{
 		imageLetter = new JLabel(new ImageIcon("images/list.jpg"));
-		imageLetter.setBounds(20,20, 660, 843);
+		imageLetter.setBounds(20,20, 657, 699);
 		add(imageLetter);
 	}
 	

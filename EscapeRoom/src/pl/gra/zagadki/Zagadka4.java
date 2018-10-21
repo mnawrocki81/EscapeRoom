@@ -85,8 +85,15 @@ public class Zagadka4 extends JDialog {
 	{
 		tHour = new JTextField();
 		tHour.setBounds(100, 560, 50, 30);
+		tHour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tAnswer.requestFocusInWindow();
+				
+			}
+		});
 		tHour.setFont(new Font("SansSerif", Font.BOLD, 15));
 		tHour.setHorizontalAlignment(JTextField.CENTER);
+		tHour.requestFocusInWindow();
 		add(tHour);
 	}
 	
@@ -94,6 +101,12 @@ public class Zagadka4 extends JDialog {
 	{
 		tMinutes = new JTextField();
 		tMinutes.setBounds(224, 540, 50, 30);
+		tMinutes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tHour.requestFocusInWindow();
+				
+			}
+		});
 		tMinutes.setFont(new Font("SansSerif", Font.BOLD, 15));
 		tMinutes.setHorizontalAlignment(JTextField.CENTER);
 		add(tMinutes);		
@@ -222,9 +235,10 @@ public class Zagadka4 extends JDialog {
 		return tAnswer.getText();
 	}
 
-		public boolean isOK() {
+	public boolean isOK() {
 		return okData;
 	}
+		
    
 
 }

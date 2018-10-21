@@ -1,6 +1,5 @@
 package pl.gra.zagadki;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,13 +11,15 @@ import javax.swing.JLabel;
 
 public class Envelope extends JDialog{
 	
-	private JLabel newspapper;
+	private JLabel newspaper;
+	private JButton bCancel;
 
 	public Envelope(JFrame owner) {
 		   super(owner, "Envelope", true);
 		   
 		   setEnvelopeParametres ();
 		   createImage();
+		   createButtonToCancel();
 }
 
 	public void setEnvelopeParametres() {
@@ -29,12 +30,24 @@ public class Envelope extends JDialog{
 	
 	public void createImage()
 	{
-		newspapper = new JLabel();
-		newspapper.setIcon(new ImageIcon("images/newspapper.jpg"));
-		newspapper.setBounds(50, 30, 600, 600);
-		add(newspapper);
+		newspaper = new JLabel();
+		newspaper.setIcon(new ImageIcon("images/newspaper.jpg"));
+		newspaper.setBounds(17, 30, 665, 719);
+		add(newspaper);
 	}
 	
+	public void createButtonToCancel()
+	{
+		bCancel = new JButton("Wróć do gry");
+		bCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				setVisible(false);
+			}
+		});
+		bCancel.setBounds(275, 800, 150, 30);
+		add(bCancel);
+	}
 	
 }
 
