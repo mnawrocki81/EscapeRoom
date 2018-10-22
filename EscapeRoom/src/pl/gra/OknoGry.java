@@ -178,7 +178,7 @@ public class OknoGry extends EscapeRoom {
 	
 	public void createFirstRiddle ()
 	{
-		bZagadka1 = new JButton("Zagadka1");
+		bZagadka1 = new JButton("Muszla");
 		bZagadka1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 //otwarcie okna dialogowego z zagadką 
@@ -200,14 +200,14 @@ public class OknoGry extends EscapeRoom {
 					bExitCode.setVisible(true);
 			}
 		});
-		bZagadka1.setBounds(300,400, 100,30);
+		bZagadka1.setBounds(150,450, 100,30);
 		bZagadka1.setVisible(false);
 		add(bZagadka1);
 	}
 	
 	public void createSecondRiddle()
 	{
-		bZagadka2 = new JButton("Zagadka2");
+		bZagadka2 = new JButton("Znaki");
 		bZagadka2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -227,14 +227,14 @@ public class OknoGry extends EscapeRoom {
 				
 				}
 		});
-		bZagadka2.setBounds(400,300, 100,30);
+		bZagadka2.setBounds(450,350, 100,30);
 		bZagadka2.setVisible(false);
 		add(bZagadka2);
 	}
 	
 	public void createThirdRiddle()
 	{
-		bZagadka3 = new JButton("Zagadka3");
+		bZagadka3 = new JButton("Liczby");
 		bZagadka3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -254,14 +254,14 @@ public class OknoGry extends EscapeRoom {
 					bExitCode.setVisible(true);
 			}
 		});
-		bZagadka3.setBounds(500,200, 100,30);
+		bZagadka3.setBounds(500,250, 100,30);
 		bZagadka3.setVisible(false);
 		add(bZagadka3);
 	}
 	
 	public void createFourthRiddle()
 	{
-		bZagadka4 = new JButton("Zagadka4");
+		bZagadka4 = new JButton("Zegar");
 		bZagadka4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -281,7 +281,7 @@ public class OknoGry extends EscapeRoom {
 					bExitCode.setVisible(true);
 			}
 		});
-		bZagadka4.setBounds(700,150, 100,30);
+		bZagadka4.setBounds(700,200, 100,30);
 		bZagadka4.setVisible(false);
 		add(bZagadka4);
 	
@@ -289,7 +289,7 @@ public class OknoGry extends EscapeRoom {
 	
 	public void createFifthRiddle() 
 	{
-		bZagadka5 = new JButton("Zagadka5");
+		bZagadka5 = new JButton("Kartkówka");
 		bZagadka5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -310,7 +310,7 @@ public class OknoGry extends EscapeRoom {
 								
 			}
 		});
-		bZagadka5.setBounds(800,450, 100,30);
+		bZagadka5.setBounds(850,400, 100,30);
 		bZagadka5.setVisible(false);
 		add(bZagadka5);
 		
@@ -330,7 +330,7 @@ public class OknoGry extends EscapeRoom {
 									
 			}
 		});
-		bLetter.setBounds(600,250, 100,30);
+		bLetter.setBounds(200,250, 100,30);
 		bLetter.setVisible(false);
 		add(bLetter);
 		
@@ -351,7 +351,7 @@ public class OknoGry extends EscapeRoom {
 									
 			}
 		});
-		bBox.setBounds(700,300, 100,30);
+		bBox.setBounds(700,350, 100,30);
 		bBox.setVisible(false);
 		add(bBox);	
 	}
