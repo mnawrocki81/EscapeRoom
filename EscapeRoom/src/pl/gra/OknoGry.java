@@ -170,8 +170,8 @@ public class OknoGry extends EscapeRoom {
 		});
 		bSwitch.setToolTipText("Włącz światło"); 
 		bSwitch.setBackground(Color.black);
-		bSwitch.setForeground(Color.black);
-		bSwitch.setBounds(1000, 200, 10, 5);
+		bSwitch.setBorderPainted(false);
+		bSwitch.setBounds(1000, 200, 100, 50);
 		bSwitch.setVisible(false);
 		add(bSwitch);
 	}
@@ -185,6 +185,7 @@ public class OknoGry extends EscapeRoom {
 				if (fib == null) {
 					fib = new Zagadka(null); // tworzenie nowego obiektu klasy zagadka, gdyby wcześniej nie był
 												// utworzony
+					
 				}
 				
 				fib.setVisible(true);
@@ -346,7 +347,7 @@ public class OknoGry extends EscapeRoom {
 				if (box == null) {
 					box = new Box(null);
 				}
-				
+
 				box.setVisible(true);
 									
 			}
