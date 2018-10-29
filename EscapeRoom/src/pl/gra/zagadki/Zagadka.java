@@ -129,8 +129,6 @@ public class Zagadka extends JDialog{
 	}
 
 	public void createButtonConfirmingTheAnswer() {
-		// przycisk Potwierdź może być użyty tylko raz, pózniej zostaje ukryty i pojawia
-		// się komunikat o poprawnej odpowiedzi
 		bAnswer = new JButton("Potwierdź");
 		bAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -168,7 +166,6 @@ public class Zagadka extends JDialog{
 		add(bCancel);
 	}
 	
-	//Funkcje do współpracy głównego okna gry i okna dialogowego
 	public String getOdp() {
 		return tAnswer.getText();
 	}
