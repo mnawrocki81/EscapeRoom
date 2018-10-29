@@ -417,7 +417,7 @@ public class OknoGry extends EscapeRoom {
 	                if (i < 60) {
 	                    if (i < 0) {
 	                        stopTimer();
-	                        lInfo.setText("Czas minął nie udało ci się wyjść!");
+	                        lInfo.setText("Czas minął, nie udało ci się wyjść!");
 	                    }
 
 	                    else if (seconds < 10) {
