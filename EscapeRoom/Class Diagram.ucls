@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="pl.gra.zagadki.Zagadka4" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Zagadka4.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1154" y="948"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="pl.gra.zagadki.Zagadka3" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Zagadka3.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1172" y="285"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="pl.gra.zagadki.Zagadka2" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Zagadka2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="932" y="276"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="pl.gra.zagadki.Letter" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Letter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="636" y="1248"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="pl.gra.zagadki.Envelope" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Envelope.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="105" y="993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="pl.gra.zagadki.Zagadka" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Zagadka.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="682" y="263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="pl.gra.zagadki.Box" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Box.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="111" y="645"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="pl.gra.zagadki.Zagadka5" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/zagadki/Zagadka5.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="864" y="1079"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="pl.gra.EscapeRoom" project="EscapeRoom" 
+    file="/EscapeRoom/src/pl/gra/EscapeRoom.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="399" y="58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="pl.gra.ExitCode" project="EscapeRoom" file="/EscapeRoom/src/pl/gra/ExitCode.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="118" y="202"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="pl.gra.Notebook" project="EscapeRoom" file="/EscapeRoom/src/pl/gra/Notebook.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="114" y="1237"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="pl.gra.OknoGry" project="EscapeRoom" file="/EscapeRoom/src/pl/gra/OknoGry.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="414" y="741"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="13">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="14" name="letter"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <bendpoint x="854" y="626"/>    
+    <bendpoint x="1048" y="588"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="17" name="numbers">        
+        <position height="18" width="50" x="944" y="575"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1018" y="574"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="20" name="notebook"/>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="16" width="23" x="191" y="1118"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="932" y="719"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="23" name="clock">        
+        <position height="18" width="33" x="908" y="739"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="16" width="23" x="962" y="777"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="26" name="envelope"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="29" name="box"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="32">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="33" name="card">        
+        <position height="18" width="30" x="678" y="970"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="257" y="254"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="36" name="panelexitCode">        
+        <position height="18" width="76" x="232" y="227"/>      
+      </attribute>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="16" width="23" x="260" y="252"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <bendpoint x="788" y="573"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="39" name="signs">        
+        <position height="18" width="34" x="746" y="545"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="16" width="23" x="781" y="531"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="42" name="fib"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
