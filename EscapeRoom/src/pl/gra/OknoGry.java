@@ -21,25 +21,26 @@ import java.awt.event.ActionEvent;
 
 public class OknoGry extends EscapeRoom {
 
-	private JButton bStart, bSwitch, bZagadka1, bZagadka2, bZagadka3, bZagadka4, 
-	bPrompt, bZagadka5, bLetter, bBox, bExitCode;
-	private JLabel house, blackroom, imageroom, lTitle, lCounter, lCounter1,lKomunikat, lOdpowiedzi;
-	private JTextArea lTekst, lPrompt;
+	private JButton bStart, bSwitch, bRiddle1, bRiddle2, bRiddle3, bRiddle4, bRiddle5,
+	bPrompt, bLetter, bBox, bExitCode, bNotebook;
+	private JLabel imageHouse, imageBlackroom, imageRoom, imageOpendoor, lTitle, lCounter, lCounter1,lInfo, lAnswers;
+	private JTextArea lText, lPrompt;
 	private JTextField tCode;
 	private JScrollPane sPrompt;
 	private Timer tm;
 	private static final String exitCode = "FAVOL";
-	private int i = 1199;
-	private int minuty, sekundy;
+	private int i = 1799;
+	private int minutes, seconds;
 	private String text = "";
 	private Zagadka fib;
-	private Zagadka2 znaki;
-	private Zagadka3 liczby;
+	private Zagadka2 signs;
+	private Zagadka3 numbers;
 	private Zagadka4 clock;
 	private Zagadka5 card;
 	private Letter letter;
 	private ExitCode panelexitCode;
 	private Box box;
+	private Notebook notebook;
 
 	public OknoGry() {
 		
@@ -50,6 +51,7 @@ public class OknoGry extends EscapeRoom {
 		createButtonStart();
 		createImageBlackRoom();
 		createImageRoom();
+		createImageOpenDoor();
 		createButtonSwitch();
 		createFirstRiddle ();
 		createSecondRiddle();
@@ -67,62 +69,58 @@ public class OknoGry extends EscapeRoom {
 		createTextFieltToEnterExitCode();
 		createButtonPrompt();
 		createTextAreaWithPrompt();
+		createNotebook();
 		
 	}
 	
-	public void setWindowParameters()
-	{
+	public void setWindowParameters() {
 		setBounds(100, 100, 1200, 800);
 		setTitle("EscapeRoom");
 		setLayout(null);
 	}
-	
-	public void createHouseImage()
-	{
-		house = new JLabel(new ImageIcon("images/house1.jpg"));
-		house.setBounds(242, 100, 716, 494);
-		add(house);
+
+	public void createHouseImage() {
+		imageHouse = new JLabel(new ImageIcon("images/house1.jpg"));
+		imageHouse.setBounds(242, 100, 716, 494);
+		add(imageHouse);
 	}
-	
-	public void createLabelTitle()
-	{
+
+	public void createLabelTitle() {
 		lTitle = new JLabel("POKÓJ LICZB", JLabel.CENTER);
 		lTitle.setBounds(400, 20, 400, 50);
 		lTitle.setForeground(Color.RED);
 		lTitle.setFont(new Font("SansSerif", Font.ITALIC, 40));
 		add(lTitle);
 	}
-	
-	public void createTextAboutAuthor()
-	{
-		lTekst = new JTextArea("Marcin Nawrocki - Praca Dyplomowa \nWWSIS Horyzont Studia Podyplomowe \n"
+
+	public void createTextAboutAuthor() {
+		lText = new JTextArea("Marcin Nawrocki - Praca Dyplomowa \nWWSIS Horyzont Studia Podyplomowe \n"
 				+ "Inżynieria Oprogramowania - Programowanie \npod kierunkiem mgr.inż. Krzysztofa Węzowskiego");
-		lTekst.setBounds(600, 630, 350, 100);
-		lTekst.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lTekst.setLineWrap(true);
-		add(lTekst);
-		
+		lText.setBounds(600, 630, 350, 100);
+		lText.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lText.setLineWrap(true);
+		add(lText);
 	}
-	
-	public void createButtonStart()
-	{
+
+	public void createButtonStart() {
 		bStart = new JButton("Rozpocznij grę");
 		bStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				lTitle.setVisible(false);
 				bStart.setVisible(false);
-				lTekst.setVisible(false);
-				house.setVisible(false);
-				blackroom.setVisible(true);
+				lText.setVisible(false);
+				imageHouse.setVisible(false);
+				imageBlackroom.setVisible(true);
 				bSwitch.setVisible(true);
 				lCounter.setVisible(true);
 				lCounter1.setVisible(true);
-				lKomunikat.setVisible(true);
-				lOdpowiedzi.setVisible(true);
+				lInfo.setVisible(true);
+				lAnswers.setVisible(true);
 				bPrompt.setVisible(true);
 				sPrompt.setVisible(true);
 				tCode.setVisible(true);
+				bNotebook.setVisible(true);
 				tm.start();
 			}
 		});
@@ -130,195 +128,187 @@ public class OknoGry extends EscapeRoom {
 		bStart.setBackground(Color.darkGray);
 		bStart.setForeground(Color.white);
 		bStart.setBounds(500, 450, 200, 50);
-		add (bStart); 
+		add(bStart);
+	}
+
+	public void createImageBlackRoom() {
+		imageBlackroom = new JLabel(new ImageIcon("images/blackroom.jpg"));
+		imageBlackroom.setBounds(50, 50, 1100, 500);
+		imageBlackroom.setVisible(false);
+		add(imageBlackroom);
+	}
+
+	public void createImageRoom() {
+		imageRoom = new JLabel(new ImageIcon("images/obraztest.jpg"));
+		imageRoom.setBounds(50, 50, 1100, 500);
+		imageRoom.setVisible(false);
+		add(imageRoom);
 	}
 	
-	
-	public void createImageBlackRoom()
-	{
-		blackroom = new JLabel(new ImageIcon("images/blackroom.jpg"));
-		blackroom.setBounds(50, 50, 1100, 500);
-		blackroom.setVisible(false);
-		add(blackroom);
+	public void createImageOpenDoor() {
+		imageOpendoor = new JLabel(new ImageIcon("images/opendoor.jpg"));
+		imageOpendoor.setBounds(50, 50, 1100, 500);
+		imageOpendoor.setVisible(false);
+		add(imageOpendoor);
 	}
-	
-	public void createImageRoom()
-	{
-		imageroom = new JLabel(new ImageIcon("images/obraztest.jpg"));
-		imageroom.setBounds(50, 50, 1100, 500);
-		imageroom.setVisible(false);
-		add(imageroom);
-	}
-	
-	public void createButtonSwitch()
-	{
+
+	public void createButtonSwitch() {
 		bSwitch = new JButton();
 		bSwitch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				blackroom.setVisible(false);
+				imageBlackroom.setVisible(false);
 				bSwitch.setVisible(false);
-				imageroom.setVisible(true);
-				bZagadka1.setVisible(true);
-				bZagadka2.setVisible(true);
-				bZagadka3.setVisible(true);
-				bZagadka4.setVisible(true);
-				bZagadka5.setVisible(true);
+				imageRoom.setVisible(true);
+				bRiddle1.setVisible(true);
+				bRiddle2.setVisible(true);
+				bRiddle3.setVisible(true);
+				bRiddle4.setVisible(true);
+				bRiddle5.setVisible(true);
 				bLetter.setVisible(true);
 				bBox.setVisible(true);
-
 			}
 		});
-		bSwitch.setToolTipText("Włącz światło"); 
+		bSwitch.setToolTipText("Włącz światło");
 		bSwitch.setBackground(Color.black);
 		bSwitch.setBorderPainted(false);
 		bSwitch.setBounds(1000, 200, 100, 50);
 		bSwitch.setVisible(false);
 		add(bSwitch);
 	}
-	
-	public void createFirstRiddle ()
-	{
-		bZagadka1 = new JButton("Muszla");
-		bZagadka1.addActionListener(new ActionListener() {
+
+	public void createFirstRiddle() {
+		bRiddle1 = new JButton("Muszla");
+		bRiddle1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                //otwarcie okna dialogowego z zagadką 
 				if (fib == null) {
-					fib = new Zagadka(null); // tworzenie nowego obiektu klasy zagadka, gdyby wcześniej nie był
-												// utworzony
-					
+					fib = new Zagadka(null); 
 				}
-				
+
 				fib.setVisible(true);
-				//fib.setFocus(); //funkcja ustawiająca kursor w JTextField do wpisania odpowiedzi
+				fib.setFocus();
 				
 				if (fib.isOK()) {
-					lOdpowiedzi.setText(text + fib.getOdp()); // dodanie poprawnej odpowiedzi do notatnika JLabel
+					lAnswers.setText(text + fib.getOdp()); 
+					text = lAnswers.getText() + "   "; 
 				}
-			
-				text = 	lOdpowiedzi.getText() + "   "; 	 //ustawienie nowej wartości pola text
-				
-				if (text.length()==20)
+
+				if (text.length() == 20)
 					bExitCode.setVisible(true);
+				
 			}
 		});
-		bZagadka1.setBounds(150,450, 100,30);
-		bZagadka1.setVisible(false);
-		add(bZagadka1);
+		bRiddle1.setBounds(150, 450, 100, 30);
+		bRiddle1.setVisible(false);
+		add(bRiddle1);
 	}
-	
-	public void createSecondRiddle()
-	{
-		bZagadka2 = new JButton("Znaki");
-		bZagadka2.addActionListener(new ActionListener() {
+
+	public void createSecondRiddle() {
+		bRiddle2 = new JButton("Znaki");
+		bRiddle2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (znaki == null) {
-					znaki = new Zagadka2(null);
+				if (signs == null) {
+					signs = new Zagadka2(null);
 				}
-				
-				znaki.setVisible(true);
-				
-				if (znaki.isOK()) {
-					lOdpowiedzi.setText(text + znaki.getOdp());
-				}
-				text = lOdpowiedzi.getText() + "   ";	
-				
-				if (text.length()==20)
-					bExitCode.setVisible(true);
-				
-				}
-		});
-		bZagadka2.setBounds(450,350, 100,30);
-		bZagadka2.setVisible(false);
-		add(bZagadka2);
-	}
-	
-	public void createThirdRiddle()
-	{
-		bZagadka3 = new JButton("Liczby");
-		bZagadka3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
 
-				if (liczby == null) {
-					liczby = new Zagadka3(null);
-				}
-				
-				liczby.setVisible(true);
-				
-				if (liczby.isOK()) {
-					lOdpowiedzi.setText(text + liczby.getOdp());
-				}
-			
-				text = 	lOdpowiedzi.getText() + "   "; 	
-				
-				if (text.length()==20)
-					bExitCode.setVisible(true);
-			}
-		});
-		bZagadka3.setBounds(500,250, 100,30);
-		bZagadka3.setVisible(false);
-		add(bZagadka3);
-	}
-	
-	public void createFourthRiddle()
-	{
-		bZagadka4 = new JButton("Zegar");
-		bZagadka4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				signs.setVisible(true);
+				signs.setFocus();
 
-				if (clock == null) {
-					clock = new Zagadka4 (null);
+				if (signs.isOK()) {
+					lAnswers.setText(text + signs.getOdp());
+					text = lAnswers.getText() + "   ";
 				}
-				
-				clock.setVisible(true);
-								
-				if (clock.isOK()) {
-					lOdpowiedzi.setText(text + clock.getOdp());
-				}
-			
-				text = 	lOdpowiedzi.getText() + "   "; 	
 				
 				if (text.length() == 20)
 					bExitCode.setVisible(true);
+				
 			}
 		});
-		bZagadka4.setBounds(700,200, 100,30);
-		bZagadka4.setVisible(false);
-		add(bZagadka4);
-	
+		bRiddle2.setBounds(450, 350, 100, 30);
+		bRiddle2.setVisible(false);
+		add(bRiddle2);
 	}
-	
-	public void createFifthRiddle() 
-	{
-		bZagadka5 = new JButton("Kartkówka");
-		bZagadka5.addActionListener(new ActionListener() {
+
+	public void createThirdRiddle() {
+		bRiddle3 = new JButton("Liczby");
+		bRiddle3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (numbers == null) {
+					numbers = new Zagadka3(null);
+				}
+
+				numbers.setVisible(true);
+				
+				if (numbers.isOK()) {
+					lAnswers.setText(text + numbers.getOdp());
+					text = lAnswers.getText() + "   ";
+				}
+
+				if (text.length() == 20)
+					bExitCode.setVisible(true);
+				
+			}
+		});
+		bRiddle3.setBounds(500, 250, 100, 30);
+		bRiddle3.setVisible(false);
+		add(bRiddle3);
+	}
+
+	public void createFourthRiddle() {
+		bRiddle4 = new JButton("Zegar");
+		bRiddle4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (clock == null) {
+					clock = new Zagadka4(null);
+				}
+
+				clock.setVisible(true);
+
+				if (clock.isOK()) {
+					lAnswers.setText(text + clock.getOdp());
+					text = lAnswers.getText() + "   ";
+				}
+
+				if (text.length() == 20)
+					bExitCode.setVisible(true);
+				
+			}
+		});
+		bRiddle4.setBounds(700, 200, 100, 30);
+		bRiddle4.setVisible(false);
+		add(bRiddle4);
+	}
+
+	public void createFifthRiddle() {
+		bRiddle5 = new JButton("Kartkówka");
+		bRiddle5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (card == null) {
-					card = new Zagadka5 (null);
+					card = new Zagadka5(null);
 				}
-				
+
 				card.setVisible(true);
-								
+
 				if (card.isOK()) {
-					lOdpowiedzi.setText(text + card.getOdp());
+					lAnswers.setText(text + card.getOdp());
+					text = lAnswers.getText() + "   ";
 				}
-			
-				text = 	lOdpowiedzi.getText() + "   "; 
-				
-				if (text.length()==20)
+
+				if (text.length() == 20)
 					bExitCode.setVisible(true);
-								
+				
 			}
 		});
-		bZagadka5.setBounds(850,400, 100,30);
-		bZagadka5.setVisible(false);
-		add(bZagadka5);
-		
+		bRiddle5.setBounds(850, 400, 100, 30);
+		bRiddle5.setVisible(false);
+		add(bRiddle5);
+
 	}
-	
-	public void createButtonLetter ()
-	{
+
+	public void createButtonLetter() {
 		bLetter = new JButton("List");
 		bLetter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -328,18 +318,16 @@ public class OknoGry extends EscapeRoom {
 				}
 
 				letter.setVisible(true);
-									
+
 			}
 		});
-		bLetter.setBounds(200,250, 100,30);
+		bLetter.setBounds(200, 250, 100, 30);
+		bLetter.setBackground(Color.gray);
 		bLetter.setVisible(false);
 		add(bLetter);
-		
 	}
-	
-	
-	public void createButtonBox()
-	{
+
+	public void createButtonBox() {
 		bBox = new JButton("Skrzynka");
 		bBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -349,17 +337,16 @@ public class OknoGry extends EscapeRoom {
 				}
 
 				box.setVisible(true);
-									
+				box.setFocus();
 			}
 		});
-		bBox.setBounds(700,350, 100,30);
+		bBox.setBounds(700, 350, 100, 30);
+		bBox.setBackground(Color.green);
 		bBox.setVisible(false);
-		add(bBox);	
+		add(bBox);
 	}
-	
-	
-	public void createLabelBeforeTheTimer()
-	{
+
+	public void createLabelBeforeTheTimer() {
 		lCounter = new JLabel("Pozostały czas:  ");
 		lCounter.setBounds(800, 600, 200, 50);
 		lCounter.setFont(new Font("SansSerif", Font.BOLD, 20));
@@ -367,53 +354,50 @@ public class OknoGry extends EscapeRoom {
 		add(lCounter);
 	}
 	
-	public void createLabelCountdownOfTime()
-	{
-		lCounter1 = new JLabel("20:00");
+	public void createLabelCountdownOfTime() {
+		lCounter1 = new JLabel("30:00");
 		lCounter1.setBounds(960, 600, 200, 50);
 		lCounter1.setFont(new Font("SansSerif", Font.BOLD, 20));
 		lCounter1.setVisible(false);
 		add(lCounter1);
 	}
-	
-	public void createLabelMessageToTheCounter()
-	{		
-		lKomunikat = new JLabel("  ");
-		lKomunikat.setBounds(800, 650, 300, 50);
-		lKomunikat.setForeground(Color.RED);
-		lKomunikat.setFont(new Font("SansSerif", Font.BOLD, 17));
-		lKomunikat.setVisible(false);
-		add(lKomunikat);
+
+	public void createLabelMessageToTheCounter() {
+		lInfo = new JLabel("  ");
+		lInfo.setBounds(800, 650, 300, 50);
+		lInfo.setForeground(Color.RED);
+		lInfo.setFont(new Font("SansSerif", Font.BOLD, 17));
+		lInfo.setVisible(false);
+		add(lInfo);
 	}
 	
-	public void createLabelToCopyResultsOfRiddles()
-	{
-		lOdpowiedzi = new JLabel(text);
-		lOdpowiedzi.setBounds(50, 600, 300,50);
-		lOdpowiedzi.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lOdpowiedzi.setVisible(false);
-		add(lOdpowiedzi);
+	public void createLabelToCopyResultsOfRiddles() {
+		lAnswers = new JLabel(text);
+		lAnswers.setBounds(50, 600, 300, 50);
+		lAnswers.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lAnswers.setVisible(false);
+		add(lAnswers);
 	}
 	
-	public void createButtonToWriteExitCode()
-	{
-		bExitCode = new JButton("Wpisz kod");
+	public void createButtonToWriteExitCode() {
+		bExitCode = new JButton("Wpisz hasło");
 		bExitCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (panelexitCode == null) {
 					panelexitCode = new ExitCode(null);
 				}
-				
+
 				panelexitCode.setOdp();
 				panelexitCode.setVisible(true);
-								
+				lInfo.setText("");
+
 				if (panelexitCode.isOK()) {
 					tCode.setEditable(true);
 					tCode.setText(panelexitCode.getOdp());
 					tCode.requestFocusInWindow();
 				}
-													
+
 			}
 		});
 		bExitCode.setBounds(50, 650, 200, 40);
@@ -423,67 +407,72 @@ public class OknoGry extends EscapeRoom {
 	}
 	
 		
-	public void createTimer()
-	{
+	public void createTimer() {
 		tm = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				minuty = i / 60;
-				sekundy = i % 60;
+				minutes = i / 60;
+	            seconds = i % 60;
 
-				if (i < 60) {
-					if (i < 0) {
-						tm.stop(); 
-						lKomunikat.setText("Czas minął nie udało ci się wyjść!");
-						bExitCode.setVisible(false);
-						tCode.setEditable(false); // po upłynięciu czasu, nie można już wpisać odpowiedzi
-					}
+	                if (i < 60) {
+	                    if (i < 0) {
+	                        stopTimer();
+	                        lInfo.setText("Czas minął nie udało ci się wyjść!");
+	                    }
 
-					else if (sekundy < 10) // zaprogramowanie aby sekundy od 0 do 9 , pokazywały się z dodatkowym zerem
-											// z przodu tj. 01, 02 itp.
-					{
-						lCounter1.setForeground(Color.RED);
-						Toolkit.getDefaultToolkit().beep();
-						lCounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
-					}
-					
-					else {
-						lCounter1.setForeground(Color.RED); // ostatnia minuta wyświetla się z kolorze czerwonym
-						Toolkit.getDefaultToolkit().beep(); // dla zwiększenia napiecia każda sekunda w ostatniej
-															// minucie z dzwiękiem
-						lCounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
-					}
+	                    else if (seconds < 10) {
+	                    	setTimerLastMinute();
+	                    	showSecondsWithZero();
+	                    }
 
-				}
+	                    else {
+	                    	setTimerLastMinute();
+	                    	showSecondsWithoutZero();
+	                    }
+	                }
 
-				else if (sekundy < 10) {
-					lCounter1.setText(Integer.toString(minuty) + ":0" + Integer.toString(sekundy));
-				} 
-				else {
-					lCounter1.setText(Integer.toString(minuty) + ":" + Integer.toString(sekundy));
-				}
-				i--;
-
-			}
-
-		});
+	                else if (seconds < 10) {
+	                	showSecondsWithZero();
+	                } else {
+	                	showSecondsWithoutZero();
+	                }
+	                i--;
+	            }
+	        });
+	    }
+	
+	public void setTimerLastMinute(){
+		lCounter1.setForeground(Color.RED);
+		Toolkit.getDefaultToolkit().beep();
 	}
 	
-	public void createTextFieltToEnterExitCode()
-	{
+	public void stopTimer() {
+		tm.stop();
+		bExitCode.setVisible(false);
+		tCode.setEditable(false);
+	}
+	
+	public void showSecondsWithZero(){
+		lCounter1.setText(Integer.toString(minutes) + ":0" + Integer.toString(seconds));
+	}
+	
+	public void showSecondsWithoutZero() {
+		lCounter1.setText(Integer.toString(minutes) + ":" + Integer.toString(seconds));
+	}
+
+	public void createTextFieltToEnterExitCode() {
 		tCode = new JTextField();
 		tCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (tCode.getText().equals(exitCode)) {
-					tm.stop();
-					lKomunikat.setText("Kod poprawny, udało Ci się wyjść!");
-					bExitCode.setVisible(false);
-					tCode.setEditable(false);
+					stopTimer();
+					lInfo.setText("Hasło poprawne, udało Ci się wyjść!");
+					openDoor();
 				}
 
 				else {
-					lKomunikat.setText("Kod błędny, próbuj dalej!");
+					lInfo.setText("Hasło błędne, próbuj dalej!");
 				}
 
 			}
@@ -494,6 +483,18 @@ public class OknoGry extends EscapeRoom {
 		tCode.setVisible(false);
 		tCode.setEditable(false);
 		add(tCode);
+	}
+	
+	public void openDoor() {
+		imageRoom.setVisible(false);
+		imageOpendoor.setVisible(true);
+		bRiddle1.setVisible(false);
+		bRiddle2.setVisible(false);
+		bRiddle3.setVisible(false);
+		bRiddle4.setVisible(false);
+		bRiddle5.setVisible(false);
+		bLetter.setVisible(false);
+		bBox.setVisible(false);
 	}
 	
 	public void createButtonPrompt() {
@@ -528,5 +529,24 @@ public class OknoGry extends EscapeRoom {
 		sPrompt.setBounds(180, 720, 400, 22);
 		sPrompt.setVisible(false);
 		add(sPrompt);
+	}
+	
+	
+	public void createNotebook() {
+		bNotebook = new JButton("Notatnik");
+		bNotebook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (notebook == null) {
+					notebook = new Notebook(null);
+				}
+
+				notebook.setVisible(true);
+				}
+		});
+		bNotebook.setBounds(600, 720, 100, 22);
+		bNotebook.setVisible(false);
+		add(bNotebook);
+	
 	}
 }

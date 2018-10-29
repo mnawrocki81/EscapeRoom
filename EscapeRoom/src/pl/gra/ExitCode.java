@@ -38,30 +38,26 @@ public class ExitCode extends JDialog {
 
 }
 
-	public void setExitCodeParametres()
-	{
+	public void setExitCodeParametres() {
 		setBounds(350, 50, 700, 900);
 		setLayout(null);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
-	
-	
-	public void createImageParameters()
-	{
+
+	public void createImageParameters() {
 		imageExitCode = new JLabel(new ImageIcon("images/klawiatura.jpg"));
-		imageExitCode.setBounds(44,140, 612, 630);
+		imageExitCode.setBounds(44, 140, 612, 630);
 		add(imageExitCode);
-		
+
 	}
-	
-	public void createTextFieldExitCode()
-	{
+
+	public void createTextFieldExitCode() {
 		tExitCode = new JTextField();
 		tExitCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				okData = true;
-				setVisible(false);	
+				setVisible(false);
 			}
 		});
 
@@ -73,10 +69,8 @@ public class ExitCode extends JDialog {
 		tExitCode.requestFocusInWindow();
 		add(tExitCode);
 	}
-	
-	
-	public void createButtonPrompt()
-	{
+
+	public void createButtonPrompt() {
 		bPrompt = new JButton("Podpowiedź");
 		bPrompt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,19 +80,18 @@ public class ExitCode extends JDialog {
 		});
 		bPrompt.setBounds(44, 780, 120, 22);
 		add(bPrompt);
-		
+
 	}
-	
-	public void createTextAreaWithPrompt()
-	{
-		lPrompt = new JTextArea("Przyjrzyj sie znakom na przyciskach"
-				+ "\nUłóż słowo z cyfr, które są odpowiedziami do zagadek."
-				+ "\nWskazówkę znajdziesz w kopercie ze skrzynki!");
+
+	public void createTextAreaWithPrompt() {
+		lPrompt = new JTextArea(
+				"Przyjrzyj sie znakom na przyciskach" + "\nUłóż słowo z cyfr, które są odpowiedziami do zagadek."
+						+ "\nWskazówkę znajdziesz w kopercie ze skrzynki!");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(165, 780, 491, 22);
 		add(sPrompt);
-		
+
 	}
 	
 	public void createButtonConfirmingTheAnswer() {
@@ -120,7 +113,7 @@ public class ExitCode extends JDialog {
 		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				okData = false;
+				okData = true;
 				setVisible(false);
 			}
 		});
