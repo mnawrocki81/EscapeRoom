@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 
 public class Envelope extends JDialog{
 	
-	private JLabel newspaper;
+	private JLabel imageNewspaper;
 	private JButton bCancel;
 
 	public Envelope(JFrame owner) {
@@ -28,16 +28,14 @@ public class Envelope extends JDialog{
 		setLayout(null);
 	}
 	
-	public void createImage()
-	{
-		newspaper = new JLabel();
-		newspaper.setIcon(new ImageIcon("images/newspaper.jpg"));
-		newspaper.setBounds(17, 30, 665, 719);
-		add(newspaper);
+	public void createImage() {
+		imageNewspaper = new JLabel();
+		imageNewspaper.setIcon(new ImageIcon("images/newspaper.jpg"));
+		imageNewspaper.setBounds(20, 30, 642, 710);
+		add(imageNewspaper);
 	}
-	
-	public void createButtonToCancel()
-	{
+
+	public void createButtonToCancel() {
 		bCancel = new JButton("Wróć do gry");
 		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,7 +16,7 @@ import javax.swing.JTextArea;
 public class Zagadka5 extends JDialog {
 	
 	private JButton bPrompt, bAnswer, bCancel;
-	private JLabel imageZagadka5,odpZagadka5, odpTrue, odpWrong;
+	private JLabel imageRiddle5,lAnswerRiddle5, lAnswerTrue, lAnswerWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private JComboBox <Integer> cbNumber;
@@ -46,48 +45,46 @@ public class Zagadka5 extends JDialog {
 	}
 	   
 	public void createImageParameters() {
-		imageZagadka5 = new JLabel(new ImageIcon("images/kartka1.jpg"));
-		imageZagadka5.setBounds(50, 30, 1000, 500);
-		add(imageZagadka5);
+		imageRiddle5 = new JLabel(new ImageIcon("images/kartka1.jpg"));
+		imageRiddle5.setBounds(50, 30, 1000, 500);
+		add(imageRiddle5);
 	}
 	   
 	public void createLabelGiveAnswer() {
-		odpZagadka5 = new JLabel("Podaj odpowiedź:  ");
-		odpZagadka5.setBounds(50, 550, 180, 30);
-		odpZagadka5.setFont(new Font("SansSerif", Font.BOLD, 20));
-		add(odpZagadka5);
+		lAnswerRiddle5 = new JLabel("Podaj odpowiedź:  ");
+		lAnswerRiddle5.setBounds(50, 550, 180, 30);
+		lAnswerRiddle5.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(lAnswerRiddle5);
 	}
 	   
 	public void createLabelAnswerTrue() {
-		odpTrue = new JLabel("Odpowiedź poprawna!");
-		odpTrue.setBounds(50, 600, 180, 30);
-		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
-		odpTrue.setVisible(false);
-		add(odpTrue);
+		lAnswerTrue = new JLabel("Odpowiedź poprawna!");
+		lAnswerTrue.setBounds(50, 600, 180, 30);
+		lAnswerTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lAnswerTrue.setVisible(false);
+		add(lAnswerTrue);
 	}
 	
-	public void createLabelAnswerWrong()
-	{
-		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
-		odpWrong.setBounds(400, 600, 350, 30);
-		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
-		odpWrong.setForeground(Color.RED);
-		odpWrong.setVisible(false);
-		add(odpWrong);
-		
+	public void createLabelAnswerWrong() {
+		lAnswerWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
+		lAnswerWrong.setBounds(400, 600, 350, 30);
+		lAnswerWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		lAnswerWrong.setForeground(Color.RED);
+		lAnswerWrong.setVisible(false);
+		add(lAnswerWrong);
+
 	}
-	   
-	public void createComboBoxToEnterAnswer()
-	{
+
+	public void createComboBoxToEnterAnswer() {
 		cbNumber = new JComboBox<>();
-		
+
 		for (int i = 0; i <= 10; i++) {
 			cbNumber.addItem(i);
 		}
 		cbNumber.setBounds(250, 550, 100, 30);
 		cbNumber.setFont(new Font("SansSerif", Font.BOLD, 20));
 		add(cbNumber);
-		
+
 	}
 	
        
@@ -104,7 +101,7 @@ public class Zagadka5 extends JDialog {
 	}
 	   
 	public void createTextAreaWithPrompt() {
-		lPrompt = new JTextArea("Jaką cyfrę musisz wpisać, aby dostać 5 z kartkówki?"
+		lPrompt = new JTextArea("Jaką cyfrę musisz wpisać, aby dostać 6 z kartkówki?"
 				+ "\nPrzyjrzyj się cyfrom po obu stronach znaku równości i znajdź logikę!"
 				+ "\nPrzjrzyj się ocenie, tam znajdziesz podpowiedź!"
 				+ "\nPodnieś cyfrę po lewej do trzeciej potęgi i dodaj ją do wyniku.");
@@ -123,12 +120,12 @@ public class Zagadka5 extends JDialog {
 				if (getOdp().equals(result)) {
 					okData = true;
 					cbNumber.setEnabled(false);
-					odpTrue.setVisible(true);
+					lAnswerTrue.setVisible(true);
 					bAnswer.setVisible(false);
-					odpWrong.setVisible(false);
+					lAnswerWrong.setVisible(false);
 					setVisible(false);
 				} else {
-					odpWrong.setVisible(true);
+					lAnswerWrong.setVisible(true);
 					cbNumber.setSelectedItem(0);
 				}
 			}

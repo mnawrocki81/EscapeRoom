@@ -25,22 +25,19 @@ public class Letter extends JDialog  {
 
 	}
 	
-	public void setLetterParametres ()
-	{
-		setBounds(350, 50, 700,900);
+	public void setLetterParametres() {
+		setBounds(350, 50, 700, 900);
 		setLayout(null);
-		//setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		// setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
-	
-	public void  createImageParameters()
-	{
+
+	public void createImageParameters() {
 		imageLetter = new JLabel(new ImageIcon("images/list.jpg"));
-		imageLetter.setBounds(20,20, 657, 699);
+		imageLetter.setBounds(20, 20, 657, 699);
 		add(imageLetter);
 	}
-	
-	public void createButtonToCancel()
-	{
+
+	public void createButtonToCancel() {
 		bCancel = new JButton("Wróć do gry");
 		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,6 +48,6 @@ public class Letter extends JDialog  {
 		bCancel.setBounds(275, 800, 150, 30);
 		add(bCancel);
 	}
-	
+
 }
 

@@ -1,6 +1,5 @@
 package pl.gra.zagadki;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +19,7 @@ public class Zagadka3 extends JDialog {
 	
 	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
-	private JLabel imageZagadka3, odpZagadka3, odpTrue, odpWrong;
+	private JLabel imageRiddle3, lAnswerRiddle3, lAnswerTrue, lAnswerWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private JSlider slider;
@@ -50,27 +49,26 @@ public class Zagadka3 extends JDialog {
 	}
 
 	public void createImageParameters() {
-		imageZagadka3 = new JLabel(new ImageIcon("images/liczby.jpg"));
-		imageZagadka3.setBounds(50, 30, 1000, 500);
-		add(imageZagadka3);
+		imageRiddle3 = new JLabel(new ImageIcon("images/liczby.jpg"));
+		imageRiddle3.setBounds(50, 30, 1000, 500);
+		add(imageRiddle3);
 	}
 	
 	public void createLabelAnswerTrue() {
-		odpTrue = new JLabel("Odpowiedź poprawna!");
-		odpTrue.setBounds(50, 600, 180, 30);
-		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
-		odpTrue.setVisible(false);
-		add(odpTrue);
+		lAnswerTrue = new JLabel("Odpowiedź poprawna!");
+		lAnswerTrue.setBounds(50, 600, 180, 30);
+		lAnswerTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lAnswerTrue.setVisible(false);
+		add(lAnswerTrue);
 	}
-	
-	public void createLabelAnswerWrong()
-	{
-		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
-		odpWrong.setBounds(470, 600, 350, 30);
-		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
-		odpWrong.setForeground(Color.RED);
-		odpWrong.setVisible(false);
-		add(odpWrong);
+
+	public void createLabelAnswerWrong() {
+		lAnswerWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
+		lAnswerWrong.setBounds(470, 600, 350, 30);
+		lAnswerWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		lAnswerWrong.setForeground(Color.RED);
+		lAnswerWrong.setVisible(false);
+		add(lAnswerWrong);
 	}
 	   
 	public void createSliderToEnterAnswer() {
@@ -91,10 +89,10 @@ public class Zagadka3 extends JDialog {
 	}
 
 	public void createLabelGiveAnswer() {
-		odpZagadka3 = new JLabel("Podaj odpowiedź:  ");
-		odpZagadka3.setBounds(50, 550, 180, 30);
-		odpZagadka3.setFont(new Font("SansSerif", Font.BOLD, 20));
-		add(odpZagadka3);
+		lAnswerRiddle3 = new JLabel("Podaj odpowiedź:  ");
+		lAnswerRiddle3.setBounds(50, 550, 180, 30);
+		lAnswerRiddle3.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(lAnswerRiddle3);
 	}
 
 	public void createTextFieldToEnterAnswer() {
@@ -106,12 +104,12 @@ public class Zagadka3 extends JDialog {
 					okData = true;
 					tAnswer.setEditable(false);
 					slider.setEnabled(false);
-					odpTrue.setVisible(true);
+					lAnswerTrue.setVisible(true);
 					bAnswer.setVisible(false);
-					odpWrong.setVisible(false);
+					lAnswerWrong.setVisible(false);
 					setVisible(false);
 				}else {
-					odpWrong.setVisible(true);
+					lAnswerWrong.setVisible(true);
 					slider.setValue(0);
 					tAnswer.setText("");
 				}
@@ -139,10 +137,13 @@ public class Zagadka3 extends JDialog {
        
 	public void createTextAreaWithPrompt() {
 
-		lPrompt = new JTextArea("Przeczytaj liczby, zwróć uwagę na tło \nskojarz liczby z alfabetem. ");
+		lPrompt = new JTextArea("Przeczytaj liczby, zwróć uwagę na tło \nskojarz liczby z alfabetem. "
+				+ "\nLiczby podane są w porządku alfabetycznym,"
+				+ "\nzwiększ dokładność do kolejnej litery,"
+				+ "\nodpowiedź mieści się w podanym w suwaku zakresie!");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
-		sPrompt.setBounds(730, 550, 300, 22);
+		sPrompt.setBounds(730, 550, 320, 22);
 		add(sPrompt);
 	}
 
@@ -157,12 +158,12 @@ public class Zagadka3 extends JDialog {
 					okData = true;
 					tAnswer.setEditable(false);
 					slider.setEnabled(false);
-					odpTrue.setVisible(true);
+					lAnswerTrue.setVisible(true);
 					bAnswer.setVisible(false);
-					odpWrong.setVisible(false);
+					lAnswerWrong.setVisible(false);
 					setVisible(false);
 				} else {
-					odpWrong.setVisible(true);
+					lAnswerWrong.setVisible(true);
 					slider.setValue(0);
 					tAnswer.setText("");
 				}
@@ -194,7 +195,6 @@ public class Zagadka3 extends JDialog {
 		tAnswer.requestFocusInWindow();
 	}
 
-	
 	public boolean isOK() {
 		return okData;
 	}

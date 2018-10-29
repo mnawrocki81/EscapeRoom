@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 public class Box extends JDialog {
 	
 	private JLabel imageBox1, imageBox2;
-	private JButton bPrompt,bOpen, bTake, bCancel;
+	private JButton bPrompt, bOpen, bTake, bCancel;
 	private Envelope envelope;
 	private JTextField openingCode;
 	private JTextArea lPrompt;
@@ -40,35 +40,27 @@ public class Box extends JDialog {
 		   createTextAreaWithPrompt();
 }
 	
-	public void setLetterParametres ()
-	{
+	public void setLetterParametres() {
 		setBounds(150, 150, 1120, 700);
 		setLayout(null);
-		//setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
 	
-	public void  createImage1Parameters()
-	{
+	public void createImage1Parameters() {
 		imageBox1 = new JLabel(new ImageIcon("images/skrzynka1.jpg"));
 		imageBox1.setBounds(50, 30, 1000, 500);
 		add(imageBox1);
-		
-
 	}
 	
-	public void  createImage2Parameters()
-	{
+	public void createImage2Parameters() {
 		imageBox2 = new JLabel(new ImageIcon("images/skrzynka2.jpg"));
 		imageBox2.setBounds(50, 30, 1000, 500);
 		imageBox2.setVisible(false);
 		add(imageBox2);
-		
+
 	}
 	
-	public void createTextFieldCodeToOpenBox()
-	{
+	public void createTextFieldCodeToOpenBox() {
 		openingCode = new JTextField();
-		
 		openingCode.setBounds(520, 375, 50, 30);
 		openingCode.setFont(new Font("SansSerif", Font.BOLD, 20));
 		openingCode.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -81,7 +73,6 @@ public class Box extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (openingCode.getText().equals(result)) {
-
 					imageBox1.setVisible(false);
 					imageBox2.setVisible(true);
 					bOpen.setVisible(false);
@@ -96,8 +87,7 @@ public class Box extends JDialog {
 		add(bOpen);
 	}
 	
-	public void createButtonTakeEnvelope()
-	{
+	public void createButtonTakeEnvelope() {
 		bTake = new JButton("Weź kopertę");
 		bTake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,11 +102,10 @@ public class Box extends JDialog {
 		bTake.setBounds(470, 270, 150, 30);
 		bTake.setVisible(false);
 		add(bTake);
-		
+
 	}
 	
-	public void createButtonToCancel()
-	{
+	public void createButtonToCancel() {
 		bCancel = new JButton("Wróć do gry");
 		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,4 +141,9 @@ public class Box extends JDialog {
 		sPrompt.setBounds(680, 600, 370, 22);
 		add(sPrompt);
 	}
+	
+	public void setFocus() {
+		openingCode.requestFocusInWindow();
+	}
+
 }

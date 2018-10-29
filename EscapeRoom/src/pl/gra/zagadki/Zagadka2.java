@@ -1,6 +1,5 @@
 package pl.gra.zagadki;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,13 +13,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-//zasada działania analogiczna jak w klasie Zagadka
 
 public class Zagadka2 extends JDialog implements ActionListener {
 	
 	private JTextField tAnswer;
 	private JButton bPrompt, bAnswer, bCancel;
-	private JLabel imageZagadka2,odpZagadka2, odpTrue, odpWrong;
+	private JLabel imageRiddle2,lAnswerRiddle2, lAnswerTrue, lAnswerWrong;
 	private JTextArea lPrompt;
 	private JScrollPane sPrompt;
 	private boolean okData;
@@ -48,35 +46,34 @@ public class Zagadka2 extends JDialog implements ActionListener {
 	}
 	   
 	public void createImageParameters() {
-		imageZagadka2 =  new JLabel(new ImageIcon("images/komputer.jpg"));
-		imageZagadka2.setBounds(50, 30, 1000, 500);
-		add(imageZagadka2);
+		imageRiddle2 =  new JLabel(new ImageIcon("images/komputer.jpg"));
+		imageRiddle2.setBounds(50, 30, 1000, 500);
+		add(imageRiddle2);
 	}
 	   
 	public void createLabelGiveAnswer() {
-		odpZagadka2 = new JLabel("Podaj odpowiedź:  ");
-		odpZagadka2.setBounds(50, 550, 180, 30);
-		odpZagadka2.setFont(new Font("SansSerif", Font.BOLD, 20));
-		add(odpZagadka2);
+		lAnswerRiddle2 = new JLabel("Podaj odpowiedź:  ");
+		lAnswerRiddle2.setBounds(50, 550, 180, 30);
+		lAnswerRiddle2.setFont(new Font("SansSerif", Font.BOLD, 20));
+		add(lAnswerRiddle2);
 	}
 	   
 	public void createLabelAnswerTrue() {
-		odpTrue = new JLabel("Odpowiedź poprawna!");
-		odpTrue.setBounds(50, 600, 180, 30);
-		odpTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
-		odpTrue.setVisible(false);
-		add(odpTrue);
+		lAnswerTrue = new JLabel("Odpowiedź poprawna!");
+		lAnswerTrue.setBounds(50, 600, 180, 30);
+		lAnswerTrue.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lAnswerTrue.setVisible(false);
+		add(lAnswerTrue);
 	}
 	
-	public void createLabelAnswerWrong()
-	{
-		odpWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
-		odpWrong.setBounds(400, 600, 350, 30);
-		odpWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
-		odpWrong.setForeground(Color.RED);
-		odpWrong.setVisible(false);
-		add(odpWrong);
-		
+	public void createLabelAnswerWrong() {
+		lAnswerWrong = new JLabel("To nie to! Przemyśl i spróbuj ponownie!");
+		lAnswerWrong.setBounds(400, 600, 350, 30);
+		lAnswerWrong.setFont(new Font("SansSerif", Font.BOLD, 16));
+		lAnswerWrong.setForeground(Color.RED);
+		lAnswerWrong.setVisible(false);
+		add(lAnswerWrong);
+
 	}
 	   
 	public void createTextFieldToEnterAnswer() {
@@ -101,7 +98,9 @@ public class Zagadka2 extends JDialog implements ActionListener {
 	}
 	   
 	public void createTextAreaWithPrompt() {
-		lPrompt = new JTextArea("Przyjrzyj sie umiejscowieniu znaków na klawiaturze komputera");
+		lPrompt = new JTextArea("Przyjrzyj sie umiejscowieniu znaków na klawiaturze komputera"
+				+ "\nco jest pod nimi?"
+				+ "\nWykonaj odpowiednie działania arytmetyczne.");
 		lPrompt.setVisible(false);
 		sPrompt = new JScrollPane(lPrompt);
 		sPrompt.setBounds(530, 550, 500, 22);
@@ -126,6 +125,10 @@ public class Zagadka2 extends JDialog implements ActionListener {
 	public String getOdp() {
 		return tAnswer.getText();
 	}
+	
+	public void setFocus() {
+		tAnswer.requestFocusInWindow();
+	}
 
 	
 	public boolean isOK() {
@@ -139,12 +142,12 @@ public class Zagadka2 extends JDialog implements ActionListener {
 			if (getOdp().equals(result)) {
 				okData = true;
 				tAnswer.setEditable(false);
-				odpTrue.setVisible(true);
+				lAnswerTrue.setVisible(true);
 				bAnswer.setVisible(false);
-				odpWrong.setVisible(false);
+				lAnswerWrong.setVisible(false);
 				setVisible(false);
 			} else {
-				odpWrong.setVisible(true);
+				lAnswerWrong.setVisible(true);
 				tAnswer.setText("");
 				tAnswer.requestFocusInWindow();
 			}
