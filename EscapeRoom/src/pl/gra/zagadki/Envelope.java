@@ -5,17 +5,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Envelope extends JDialog{
+public class Envelope extends JFrame{
 	
 	private JLabel imageNewspaper;
 	private JButton bCancel;
 
 	public Envelope(JFrame owner) {
-		   super(owner, "Envelope", true);
 		   
 		   setEnvelopeParametres ();
 		   createImage();

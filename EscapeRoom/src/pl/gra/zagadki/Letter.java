@@ -6,18 +6,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class Letter extends JDialog  {
+public class Letter extends JFrame  {
 	
 	private JLabel imageLetter;
 	private JButton bCancel;
 		
 	public Letter(JFrame owner) {
-		super(owner, "Letter", true);
 
 		setLetterParametres();
 		createImageParameters();
@@ -28,7 +26,6 @@ public class Letter extends JDialog  {
 	public void setLetterParametres() {
 		setBounds(350, 50, 700, 900);
 		setLayout(null);
-		// setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 	}
 
 	public void createImageParameters() {
