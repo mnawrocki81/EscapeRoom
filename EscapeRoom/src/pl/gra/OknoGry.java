@@ -66,7 +66,7 @@ public class OknoGry extends EscapeRoom {
 		createLabelToCopyResultsOfRiddles();
 		createButtonToWriteExitCode();
 		createTimer();
-		createTextFieltToEnterExitCode();
+		createTextFieldToEnterExitCode();
 		createButtonPrompt();
 		createTextAreaWithPrompt();
 		createNotebook();
@@ -80,7 +80,7 @@ public class OknoGry extends EscapeRoom {
 	}
 
 	public void createHouseImage() {
-		imageHouse = new JLabel(new ImageIcon("images/house1.jpg"));
+	  	imageHouse = new JLabel(new ImageIcon("images/house1.jpg"));
 		imageHouse.setBounds(242, 100, 716, 494);
 		add(imageHouse);
 	}
@@ -393,7 +393,7 @@ public class OknoGry extends EscapeRoom {
 				lInfo.setText("");
 
 				if (panelexitCode.isOK()) {
-					tCode.setEditable(true);
+					
 					tCode.setText(panelexitCode.getOdp());
 					tCode.requestFocusInWindow();
 				}
@@ -415,11 +415,11 @@ public class OknoGry extends EscapeRoom {
 	            seconds = i % 60;
 
 	                if (i < 60) {
-	                    if (i < 0) {
+	                    if (i==0) {
+	                    	showSecondsWithZero();
 	                        stopTimer();
 	                        lInfo.setText("Czas minął, nie udało ci się wyjść!");
 	                    }
-
 	                    else if (seconds < 10) {
 	                    	setTimerLastMinute();
 	                    	showSecondsWithZero();
@@ -449,7 +449,7 @@ public class OknoGry extends EscapeRoom {
 	public void stopTimer() {
 		tm.stop();
 		bExitCode.setVisible(false);
-		tCode.setEditable(false);
+		
 	}
 	
 	public void showSecondsWithZero(){
@@ -460,21 +460,21 @@ public class OknoGry extends EscapeRoom {
 		lCounter1.setText(Integer.toString(minutes) + ":" + Integer.toString(seconds));
 	}
 
-	public void createTextFieltToEnterExitCode() {
+	public void createTextFieldToEnterExitCode() {
 		tCode = new JTextField();
 		tCode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (i > 0) {
+					if (tCode.getText().equals(exitCode)) {
+						stopTimer();
+						lInfo.setText("Hasło poprawne, udało Ci się wyjść!");
+						openDoor();
+					}
 
-				if (tCode.getText().equals(exitCode)) {
-					stopTimer();
-					lInfo.setText("Hasło poprawne, udało Ci się wyjść!");
-					openDoor();
+					else {
+						lInfo.setText("Hasło błędne, próbuj dalej!");
+					}
 				}
-
-				else {
-					lInfo.setText("Hasło błędne, próbuj dalej!");
-				}
-
 			}
 		});
 		tCode.setBounds(265, 650, 150, 40);
