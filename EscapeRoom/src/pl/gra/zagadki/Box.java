@@ -1,7 +1,7 @@
 package pl.gra.zagadki;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +27,8 @@ public class Box extends JDialog {
 	private static final String result = "238";
 
 	public Box(JFrame owner) {
-		   super(owner, "Box", true);
+		super(owner, "Skrzynka", true);
+		
 		   
 		   setLetterParametres ();
 		   createImage1Parameters();
@@ -63,7 +64,7 @@ public class Box extends JDialog {
 		openingCode = new JTextField();
 		openingCode.setBounds(520, 375, 50, 30);
 		openingCode.setFont(new Font("SansSerif", Font.BOLD, 20));
-		openingCode.setLayout(new FlowLayout(FlowLayout.CENTER));
+		openingCode.setHorizontalAlignment(JTextField.CENTER);
 		add(openingCode);
 	}
 	
@@ -78,6 +79,10 @@ public class Box extends JDialog {
 					bOpen.setVisible(false);
 					openingCode.setVisible(false);
 					bTake.setVisible(true);
+				}
+				else {
+				     openingCode.setText("");
+				     setFocus();
 				}
 			}
 		});
