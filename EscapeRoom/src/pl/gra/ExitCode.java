@@ -113,7 +113,7 @@ public class ExitCode extends JDialog {
 		bCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				okData = true;
+				okData = false;
 				setVisible(false);
 			}
 		});
@@ -127,6 +127,7 @@ public class ExitCode extends JDialog {
 
 	public void setOdp() {
 		tExitCode.setText("");
+		tExitCode.requestFocusInWindow();
 	}
 
 	public boolean isOK() {
